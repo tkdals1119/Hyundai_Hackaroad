@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 
 
 /**
- * Created by Userinsight on 2017-10-25.
+ * Created by BSM on 2017-10-25.
  */
 
 public interface ServerApi {
