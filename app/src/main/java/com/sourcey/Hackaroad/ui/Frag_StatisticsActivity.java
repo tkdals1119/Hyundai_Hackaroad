@@ -9,17 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sourcey.Hackaroad.R;
+
 /**
  * Created by Userinsight on 2017-10-26.
  */
 
-public class FragmentText2 extends Fragment {
+public class Frag_StatisticsActivity extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView text = new TextView(container.getContext());
-        text.setText("두번째!");
-        text.setGravity(Gravity.CENTER);
-
-        return text;
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {git 
+        View view = inflater.inflate(R.layout.activity_frag_statistics, container, false);
+        return view;
     }
 }

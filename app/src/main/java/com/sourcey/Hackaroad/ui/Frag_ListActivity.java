@@ -9,17 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sourcey.Hackaroad.R;
+
 /**
  * Created by BSM on 2017-10-26.
  */
 
-public class FragmentText extends Fragment {
+public class Frag_ListActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        TextView text = new TextView(container.getContext());
-        text.setText("첫번째!");
-        text.setGravity(Gravity.CENTER);
-
-        return text;
+        View view = inflater.inflate(R.layout.activity_frag_list, container, false);
+        return view;
     }
 }

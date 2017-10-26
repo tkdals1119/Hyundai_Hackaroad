@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
@@ -15,9 +14,7 @@ import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 
-import static com.sourcey.Hackaroad.R.id.toolbar;
-
-public class StatisticsActivity extends ActionBarActivity implements MaterialTabListener {
+public class TabMenuActivity extends ActionBarActivity implements MaterialTabListener {
 
     MaterialTabHost tabHost;
     ViewPager pager;
@@ -26,7 +23,7 @@ public class StatisticsActivity extends ActionBarActivity implements MaterialTab
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statistics);
+        setContentView(R.layout.activity_tab_menu_activity);
 
         Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
         this.setSupportActionBar(toolbar);
@@ -79,9 +76,9 @@ public class StatisticsActivity extends ActionBarActivity implements MaterialTab
             switch(position)
             {
                 case 0:
-                    return new FragmentText();
+                    return new Frag_ListActivity();
                 case 1:
-                    return new FragmentText2();
+                    return new Frag_StatisticsActivity();
                 default:
                     return null;
             }
