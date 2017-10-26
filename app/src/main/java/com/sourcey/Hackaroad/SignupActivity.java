@@ -32,9 +32,11 @@ public class SignupActivity extends AppCompatActivity {
     @BindView(R.id.link_login) TextView link_login;
 
 
-    @OnClick(R.id.input_password)
+    @OnClick(R.id.btn_signup)
     void onClickBtn_SignUp()
     {
+        Toast.makeText(this, "눌럿당", Toast.LENGTH_SHORT).show();
+
         name = input_name.getText().toString();
         login_id = input_id.getText().toString();
         password = input_password.getText().toString();
@@ -48,13 +50,15 @@ public class SignupActivity extends AppCompatActivity {
             Driver.getInstance().setname(name);
             Driver.getInstance().setloginid(login_id);
             Driver.getInstance().setpassword(password);
+            Log.d(TAG, name);
+            Log.d(TAG, login_id);
+            Log.d(TAG, password);
         }
         ApiRequester.getInstance().signUpDriver(Driver.getDriver(), new ApiRequester.UserCallback<Driver>() {
             @Override
             public void onSuccess(Driver result) {
                 Toast.makeText(SignupActivity.this, "회원가입완료", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onFail() {
                 Toast.makeText(SignupActivity.this, "회원가입실패", Toast.LENGTH_SHORT).show();

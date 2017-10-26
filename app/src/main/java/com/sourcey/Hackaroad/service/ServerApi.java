@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 
@@ -21,7 +22,7 @@ public interface ServerApi {
 
     //test1
     public static final Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://dev-dictation-server.herokuapp.com")
+            .baseUrl("https://hyundaiserver-sangm2n.c9users.io")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 }
