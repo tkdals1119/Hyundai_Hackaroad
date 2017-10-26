@@ -12,8 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sourcey.Hackaroad.ui.StatisticsActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -23,6 +26,13 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.input_password) EditText _passwordText;
     @BindView(R.id.btn_login) Button _loginButton;
     @BindView(R.id.link_signup) TextView _signupLink;
+
+    @OnClick(R.id.btn_login)
+    void onClickBtn_Login()
+    {
+        Intent e = new Intent(LoginActivity.this, StatisticsActivity.class);
+        startActivity(e);
+    }
     
     @Override
     public void onCreate(Bundle savedInstanceState) {

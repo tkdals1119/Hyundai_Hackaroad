@@ -17,7 +17,7 @@ import retrofit2.http.POST;
  */
 
 public interface ServerApi {
-    @POST("/drivers")
+    @POST("/loginusers")
     Call<Driver> signUpDriver(@Body JsonObject driver);
 
     //test1
