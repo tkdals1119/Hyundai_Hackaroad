@@ -17,7 +17,7 @@ import com.sourcey.Hackaroad.R;
 
 public class Frag_StatisticsActivity extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {git 
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_frag_statistics, container, false);
         return view;
     }
