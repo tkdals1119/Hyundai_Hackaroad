@@ -73,7 +73,7 @@ public class ApiRequester {
             public void onFailure(Call<T> call, Throwable t) {
                 // TODO Auto-generated method stub
                 System.out.println(t.getMessage());
-                Toast.makeText(new LoginActivity().getApplicationContext(), "서버연결이 되지 않습니다. 문의바랍니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(new LoginActivity(), "서버연결이 되지 않습니다. 문의바랍니다.", Toast.LENGTH_SHORT).show();
                 callback.onFail();
             }
         }

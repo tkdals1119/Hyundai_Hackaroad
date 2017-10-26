@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,13 +36,11 @@ public class SignupActivity extends AppCompatActivity {
     @OnClick(R.id.btn_signup)
     void onClickBtn_SignUp()
     {
-        Toast.makeText(this, "눌럿당", Toast.LENGTH_SHORT).show();
-
         name = input_name.getText().toString();
         login_id = input_id.getText().toString();
         password = input_password.getText().toString();
 
-        if(name==null || login_id==null || password==null)
+        if(name.isEmpty() || login_id.isEmpty() || password.isEmpty() )
         {
             Toast.makeText(this, "정보를 기재해 주세요.", Toast.LENGTH_SHORT).show();
         }
@@ -50,20 +49,24 @@ public class SignupActivity extends AppCompatActivity {
             Driver.getInstance().setname(name);
             Driver.getInstance().setloginid(login_id);
             Driver.getInstance().setpassword(password);
+
             Log.d(TAG, name);
             Log.d(TAG, login_id);
             Log.d(TAG, password);
+            Log.d(TAG, "API전");
+
+            ApiRequester.getInstance().signUpDriver(Driver.getDriver(), new ApiRequester.UserCallback<Driver>() {
+                @Override
+                public void onSuccess(Driver result) {
+                    Toast.makeText(SignupActivity.this, "회원가입완료", Toast.LENGTH_SHORT).show();
+                }
+                @Override
+                public void onFail() {
+                    Toast.makeText(SignupActivity.this, "회원가입실패", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-        ApiRequester.getInstance().signUpDriver(Driver.getDriver(), new ApiRequester.UserCallback<Driver>() {
-            @Override
-            public void onSuccess(Driver result) {
-                Toast.makeText(SignupActivity.this, "회원가입완료", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onFail() {
-                Toast.makeText(SignupActivity.this, "회원가입실패", Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
     
     @Override
@@ -71,5 +74,6 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
+
     }
 }
