@@ -1,5 +1,6 @@
 package com.sourcey.Hackaroad.utils;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -7,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.sourcey.Hackaroad.LoginActivity;
+import com.sourcey.Hackaroad.MyApplication;
 import com.sourcey.Hackaroad.model.Driver;
 import com.sourcey.Hackaroad.service.ServerApi;
 
@@ -22,7 +24,7 @@ import retrofit2.Response;
 
 public class ApiRequester {
 
-    ServerApi dictationServerApi;
+    ServerApi driverServerApi;
     Gson gson;
     JsonParser parser;
     Callback callback;
@@ -36,6 +38,7 @@ public class ApiRequester {
         }
         return apiRequester;
     }
+
 
     public interface UserCallback<T> {
         void onSuccess(T result);
@@ -72,8 +75,8 @@ public class ApiRequester {
             @Override
             public void onFailure(Call<T> call, Throwable t) {
                 // TODO Auto-generated method stub
-                System.out.println(t.getMessage());
-                Toast.makeText(new LoginActivity(), "서버연결이 되지 않습니다. 문의바랍니다.", Toast.LENGTH_SHORT).show();
+                System.out.println("onFailure"+  t.getMessage());
+                Toast.makeText(new LoginActivity().getApplicationContext(), "서버연결이 되지 않습니다. 문의바랍니다.", Toast.LENGTH_SHORT).show();
                 callback.onFail();
             }
         }
@@ -105,7 +108,6 @@ public class ApiRequester {
                 int status = response.code();
                 System.out.println(response.message());
                 if (status == 404) {
-
                     callback.onSuccess(false);
                 } else {
                     System.out.println("서버 실패");
@@ -126,13 +128,19 @@ public class ApiRequester {
     private ApiRequester() {
         parser = new JsonParser();
         gson = new Gson();
-        dictationServerApi = ServerApi.retrofit.create(ServerApi.class);
+        driverServerApi = ServerApi.retrofit.create(ServerApi.class);
     }
 
-    //학생 회원 가입
-    public void signUpDriver(Driver student, UserCallback<Driver> userCallback){
-        Call<Driver> call = dictationServerApi.signUpDriver(parser.parse(gson.toJson(student)).getAsJsonObject());
+    //운전자 회원 가입
+    public void signUpDriver(Driver driver, UserCallback<Driver> userCallback){
+        Call<Driver> call = driverServerApi.signUpDriver(parser.parse(gson.toJson(driver)).getAsJsonObject());
         call.enqueue(new ObjectCallback<Driver>(userCallback));
+    }
+
+    // 운전자 등록 여부 확인
+    public void checkDuplicateDriver(Driver driver, UserCallback<Boolean> userCallback){
+        Call<okhttp3.ResponseBody> call = driverServerApi.checkDuplicateDriver(driver.getname(), driver.getLoginid());
+        call.enqueue(new ResultCallback(userCallback));
     }
 
 }

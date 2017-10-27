@@ -4,12 +4,14 @@ package com.sourcey.Hackaroad.service;
 import com.google.gson.JsonObject;
 import com.sourcey.Hackaroad.model.Driver;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 
 /**
@@ -19,6 +21,11 @@ import retrofit2.http.POST;
 public interface ServerApi {
     @POST("/loginusers")
     Call<Driver> signUpDriver(@Body JsonObject driver);
+
+    //학생 중복 검사
+    @GET("/driver/check_duplicate")
+    Call<ResponseBody> checkDuplicateDriver(	 @Query("name") String name,
+                                                 @Query("loginid") String loginid);
 
     //test1
     public static final Retrofit retrofit = new Retrofit.Builder()
