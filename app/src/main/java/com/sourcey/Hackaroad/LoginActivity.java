@@ -29,6 +29,15 @@ public class LoginActivity extends AppCompatActivity {
         Intent e = new Intent(LoginActivity.this, TabMenuActivity.class);
         startActivity(e);
     }
+
+    @OnClick(R.id.link_signup)
+    void onClickLink_SignUp()
+    {
+        Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+        startActivity(i);
+    }
+
+
     
     @Override
     public void onCreate(Bundle savedInstanceState) {

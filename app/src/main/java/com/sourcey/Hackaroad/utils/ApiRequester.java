@@ -1,6 +1,5 @@
 package com.sourcey.Hackaroad.utils;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -8,7 +7,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.sourcey.Hackaroad.LoginActivity;
-import com.sourcey.Hackaroad.MyApplication;
 import com.sourcey.Hackaroad.model.Driver;
 import com.sourcey.Hackaroad.service.ServerApi;
 
