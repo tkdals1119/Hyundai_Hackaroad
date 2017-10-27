@@ -28,7 +28,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.Dark" />
-        <activity android:name=".ui.StatisticsActivity"
+        <activity android:name=".ui.TabMenuActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
 ></activity>
     </application>

@@ -1,18 +1,14 @@
 package com.sourcey.Hackaroad;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import android.content.Intent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.sourcey.Hackaroad.ui.StatisticsActivity;
+import com.sourcey.Hackaroad.ui.TabMenuActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.btn_login)
     void onClickBtn_Login()
     {
-        Intent e = new Intent(LoginActivity.this, StatisticsActivity.class);
+        Intent e = new Intent(LoginActivity.this, TabMenuActivity.class);
         startActivity(e);
     }
     
