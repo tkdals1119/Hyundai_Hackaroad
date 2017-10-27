@@ -25,6 +25,7 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabmenu_activity);
 
+
         Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
         this.setSupportActionBar(toolbar);
         toolbar.setTitle("일해라노예야");
@@ -76,9 +77,10 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
             switch(position)
             {
                 case 0:
-                    return new Frag_List();
+                    return new Frag_ListActivity();
                 case 1:
-                    return new Frag_Statistic();
+                    return new Frag_StatisticsActivity();
+
                 default:
                     return null;
             }

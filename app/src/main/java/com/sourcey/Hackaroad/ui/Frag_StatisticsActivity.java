@@ -12,14 +12,13 @@ import android.widget.TextView;
 import com.sourcey.Hackaroad.R;
 
 /**
- * Created by BSM on 2017-10-26.
+ * Created by Userinsight on 2017-10-26.
  */
 
-public class Frag_List extends Fragment {
+public class Frag_StatisticsActivity extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_frag_list, container, false);
-
+        View view = inflater.inflate(R.layout.activity_frag_statistics, container, false);
         return view;
     }
 }
