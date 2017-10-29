@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.sourcey.Hackaroad.ui.PieChartActivity;
 import com.sourcey.Hackaroad.ui.TabMenuActivity;
 
 import butterknife.BindView;
@@ -26,14 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.btn_login)
     void onClickBtn_Login()
     {
-        Intent e = new Intent(LoginActivity.this, TabMenuActivity.class);
+        Intent e = new Intent(LoginActivity.this, PieChartActivity.class);
         startActivity(e);
     }
 
     @OnClick(R.id.link_signup)
     void onClickLink_SignUp()
     {
-        Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+        Intent i = new Intent(LoginActivity.this, TabMenuActivity.class);
         startActivity(i);
     }
 

@@ -9,8 +9,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
-
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,8 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.Dark" />
@@ -28,13 +24,12 @@
             android:theme="@style/AppTheme.Dark" />
         <activity
             android:name=".ui.TabMenuActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".SignupActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.Dark"/>
-
-
+            android:theme="@style/AppTheme.Dark" />
+        <activity android:name=".ui.PieChartActivity"></activity>
     </application>
 
 </manifest>
