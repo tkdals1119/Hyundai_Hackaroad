@@ -137,8 +137,17 @@ public class ApiRequester {
 
     // 운전자 등록 여부 확인
     public void checkDuplicateDriver(Driver driver, UserCallback<Boolean> userCallback){
-        Call<okhttp3.ResponseBody> call = driverServerApi.checkDuplicateDriver(driver.getname(), driver.getLoginid());
+        Call<okhttp3.ResponseBody> call = driverServerApi.checkDuplicateDriver(driver.getLoginid(), driver.getPassword());
         call.enqueue(new ResultCallback(userCallback));
     }
+
+//    // 운전자 로그인
+//    public void loginDriver(Driver driver, UserCallback<Driver> userCallback) {
+//        Call<Driver> call = driverServerApi.loginDriver(   "driver",
+//                driver.getname(),
+//                driver.getLoginid(),
+//                driver.getPassword());
+//        call.enqueue(new ObjectCallback<Driver>(userCallback));
+//    }
 
 }

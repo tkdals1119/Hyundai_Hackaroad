@@ -9,12 +9,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.sourcey.Hackaroad.R;
+import com.sourcey.Hackaroad.service.BackPressCloseHandler;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 
 public class TabMenuActivity extends ActionBarActivity implements MaterialTabListener {
+
+    private BackPressCloseHandler backPressCloseHandle;
 
     MaterialTabHost tabHost;
     ViewPager pager;
@@ -24,6 +27,7 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabmenu_activity);
+        backPressCloseHandle = new BackPressCloseHandler(this);
 
 
         Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
@@ -60,6 +64,12 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
     @Override
     public void onTabReselected(MaterialTab tab) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Disable going back to the MainActivity
+        backPressCloseHandle.onBackPressed();
     }
 
     @Override

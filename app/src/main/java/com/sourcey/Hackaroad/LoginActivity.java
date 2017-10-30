@@ -4,31 +4,72 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sourcey.Hackaroad.model.Driver;
+import com.sourcey.Hackaroad.service.BackPressCloseHandler;
 import com.sourcey.Hackaroad.ui.PieChartActivity;
 import com.sourcey.Hackaroad.ui.TabMenuActivity;
+import com.sourcey.Hackaroad.utils.ApiRequester;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private BackPressCloseHandler backPressCloseHandle;
+
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
-    @BindView(R.id.input_email) EditText _emailText;
-    @BindView(R.id.input_password) EditText _passwordText;
-    @BindView(R.id.btn_login) Button _loginButton;
-    @BindView(R.id.link_signup) TextView _signupLink;
+    private String login_id;
+    private String password;
+
+    @BindView(R.id.login_input_id) EditText login_input_id;
+    @BindView(R.id.login_input_password) EditText login_input_password;
+    @BindView(R.id.btn_login) Button btn_login;
+    @BindView(R.id.link_signup) TextView link_signup;
 
     @OnClick(R.id.btn_login)
     void onClickBtn_Login()
     {
-        Intent e = new Intent(LoginActivity.this, TabMenuActivity.class);
-        startActivity(e);
+        login_id = login_input_id.getText().toString();
+        password = login_input_password.getText().toString();
+
+        if(login_id.isEmpty() || password.isEmpty())
+        {
+            Toast.makeText(this, "정보를 기재해 주세요.", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Driver.getInstance().setloginid(login_id);
+            Driver.getInstance().setpassword(password);
+
+            ApiRequester.getInstance().checkDuplicateDriver(Driver.getInstance(), new ApiRequester.UserCallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    if(result)
+                    {
+                        Toast.makeText(LoginActivity.this, "로그인 완료!", Toast.LENGTH_SHORT).show();
+
+                        Intent e = new Intent(LoginActivity.this, TabMenuActivity.class);
+                        startActivity(e);
+                    }
+                    else
+                    {
+                        Toast.makeText(LoginActivity.this, "등록 되어 있는 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onFail() {
+                }
+            });
+        }
     }
 
     @OnClick(R.id.link_signup)
@@ -45,12 +86,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        backPressCloseHandle = new BackPressCloseHandler(this);
+
     }
 
     @Override
     public void onBackPressed() {
         // Disable going back to the MainActivity
-        moveTaskToBack(true);
+        backPressCloseHandle.onBackPressed();
     }
 //
 //    public void onLoginSuccess() {
