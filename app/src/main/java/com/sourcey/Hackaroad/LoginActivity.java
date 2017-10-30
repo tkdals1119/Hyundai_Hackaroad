@@ -27,14 +27,14 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.btn_login)
     void onClickBtn_Login()
     {
-        Intent e = new Intent(LoginActivity.this, PieChartActivity.class);
+        Intent e = new Intent(LoginActivity.this, TabMenuActivity.class);
         startActivity(e);
     }
 
     @OnClick(R.id.link_signup)
     void onClickLink_SignUp()
     {
-        Intent i = new Intent(LoginActivity.this, TabMenuActivity.class);
+        Intent i = new Intent(LoginActivity.this, SignupActivity.class);
         startActivity(i);
     }
 

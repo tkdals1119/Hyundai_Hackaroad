@@ -49,17 +49,21 @@ public class Frag_StatisticsActivity extends SimpleFragment {
         mChart.setCenterTextTypeface(tf);
 
         // radius of the center hole in percent of maximum radius
-        mChart.setHoleRadius(45f);
-        mChart.setTransparentCircleRadius(50f);
+        mChart.setHoleRadius(58f);
+        mChart.setTransparentCircleRadius(61f);
 
         mChart.setDrawHoleEnabled(true);
         mChart.setRotationAngle(0);
         mChart.setRotationEnabled(true);
         mChart.setHighlightPerTapEnabled(true);
-        mChart.animateY(2500, Easing.EasingOption.EaseInOutQuad);
+        mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
         mChart.setTransparentCircleColor(Color.WHITE);
         mChart.setTransparentCircleAlpha(110);
         mChart.setUsePercentValues(true);
+        mChart.setDragDecelerationFrictionCoef(0.95f);
+        mChart.setExtraOffsets(5, 10, 5, 5);
+
+
 
 
         Legend l = mChart.getLegend();
