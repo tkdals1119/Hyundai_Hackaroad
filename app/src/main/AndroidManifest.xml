@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.VideoViewActivity" />
 
         <activity
             android:name=".SignupActivity"
@@ -31,6 +32,7 @@
         <activity android:name=".ui.TabMenuActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
 ></activity>
+
     </application>
 
 </manifest>

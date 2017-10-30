@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#009688"
+        android:background="#00aeef"
         />
 
     <it.neokree.materialtabs.MaterialTabHost
@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_below="@+id/toolbar"
-        app:primaryColor="#009688"
-        app:accentColor="#ffc400" />
+        app:primaryColor="#00aeef"
+        app:accentColor="#bbbbbb" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
