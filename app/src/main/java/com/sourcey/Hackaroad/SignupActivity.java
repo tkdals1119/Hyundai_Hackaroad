@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sourcey.Hackaroad.model.Driver;
+import com.sourcey.Hackaroad.ui.TabMenuActivity;
 import com.sourcey.Hackaroad.utils.ApiRequester;
 
 import butterknife.BindView;
@@ -50,22 +51,43 @@ public class SignupActivity extends AppCompatActivity {
             Driver.getInstance().setloginid(login_id);
             Driver.getInstance().setpassword(password);
 
-            Log.d(TAG, name);
-            Log.d(TAG, login_id);
-            Log.d(TAG, password);
-            Log.d(TAG, "API전");
+//            ApiRequester.getInstance().checkDuplicateDriver(Driver.getInstance(), new ApiRequester.UserCallback<Boolean>() {
+//                @Override
+//                public void onSuccess(Boolean result) {
+//                    if(result)
+//                    {
+//                        Toast.makeText(SignupActivity.this, "이미 가입 되어 있는 사용자 입니다.", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else
+//                    {
+//                        Log.d(TAG, "onSuccess: 정보없지롱");
 
-            ApiRequester.getInstance().signUpDriver(Driver.getDriver(), new ApiRequester.UserCallback<Driver>() {
-                @Override
-                public void onSuccess(Driver result) {
-                    Toast.makeText(SignupActivity.this, "회원가입완료", Toast.LENGTH_SHORT).show();
-                }
-                @Override
-                public void onFail() {
-                    Toast.makeText(SignupActivity.this, "회원가입실패", Toast.LENGTH_SHORT).show();
-                }
-            });
+
+                        ApiRequester.getInstance().signUpDriver(Driver.getInstance().getDriver(), new ApiRequester.UserCallback<Driver>() {
+                            @Override
+                            public void onSuccess(Driver result) {
+                                Toast.makeText(SignupActivity.this, "회원가입완료", Toast.LENGTH_SHORT).show();
+                            }
+                            @Override
+                            public void onFail() {
+                                Toast.makeText(SignupActivity.this, "회원가입실패. 관리자에게 문의바랍니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+
+//                    }
+//                }
+//                @Override
+//                public void onFail() {
+//
+//                }
+//            });
+
         }
+
+        Intent intent = new Intent(SignupActivity.this, TabMenuActivity.class);
+        startActivity(intent);
 
     }
     

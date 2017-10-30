@@ -28,6 +28,14 @@ public class Driver {
         return driver;
     }
 
+    public Driver(String id, String name, String loginid, String password)
+    {
+        this.setId(id);
+        this.setname(name);
+        this.setloginid(loginid);
+        this.setpassword(password);
+    }
+
     @SerializedName("id")
     @Expose
     private String id;
