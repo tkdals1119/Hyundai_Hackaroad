@@ -9,6 +9,8 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -24,8 +26,10 @@ public interface ServerApi {
 
     //학생 중복 검사
     @GET("/driver/check_duplicate")
-    Call<ResponseBody> checkDuplicateDriver(	 @Query("name") String name,
-                                                 @Query("loginid") String loginid);
+    Call<ResponseBody> checkDuplicateDriver(	 @Query("loginid") String loginid,
+                                                 @Query("password") String password);
+
+
 
     //test1
     public static final Retrofit retrofit = new Retrofit.Builder()

@@ -33,7 +33,6 @@ public class SignupActivity extends AppCompatActivity {
     @BindView(R.id.btn_signup) Button btn_signup;
     @BindView(R.id.link_login) TextView link_login;
 
-
     @OnClick(R.id.btn_signup)
     void onClickBtn_SignUp()
     {
@@ -51,22 +50,25 @@ public class SignupActivity extends AppCompatActivity {
             Driver.getInstance().setloginid(login_id);
             Driver.getInstance().setpassword(password);
 
-//            ApiRequester.getInstance().checkDuplicateDriver(Driver.getInstance(), new ApiRequester.UserCallback<Boolean>() {
-//                @Override
-//                public void onSuccess(Boolean result) {
-//                    if(result)
-//                    {
-//                        Toast.makeText(SignupActivity.this, "이미 가입 되어 있는 사용자 입니다.", Toast.LENGTH_SHORT).show();
-//                    }
-//                    else
-//                    {
-//                        Log.d(TAG, "onSuccess: 정보없지롱");
+            ApiRequester.getInstance().checkDuplicateDriver(Driver.getInstance(), new ApiRequester.UserCallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean result) {
+                    if(result)
+                    {
+                        Toast.makeText(SignupActivity.this, "이미 가입 되어 있는 사용자 입니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Log.d(TAG, "onSuccess: 정보없지롱");
 
 
                         ApiRequester.getInstance().signUpDriver(Driver.getInstance().getDriver(), new ApiRequester.UserCallback<Driver>() {
                             @Override
                             public void onSuccess(Driver result) {
                                 Toast.makeText(SignupActivity.this, "회원가입완료", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(SignupActivity.this, TabMenuActivity.class);
+                                startActivity(intent);
                             }
                             @Override
                             public void onFail() {
@@ -76,18 +78,13 @@ public class SignupActivity extends AppCompatActivity {
 
 
 
-//                    }
-//                }
-//                @Override
-//                public void onFail() {
-//
-//                }
-//            });
-
+                    }
+                }
+                @Override
+                public void onFail() {
+                }
+            });
         }
-
-        Intent intent = new Intent(SignupActivity.this, TabMenuActivity.class);
-        startActivity(intent);
 
     }
     
