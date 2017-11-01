@@ -59,15 +59,12 @@ public class SignupActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Log.d(TAG, "onSuccess: 정보없지롱");
-
-
                         ApiRequester.getInstance().signUpDriver(Driver.getInstance().getDriver(), new ApiRequester.UserCallback<Driver>() {
                             @Override
                             public void onSuccess(Driver result) {
-                                Toast.makeText(SignupActivity.this, "회원가입완료", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivity.this, "회원가입완료, 다시 로그인 해주세요.", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(SignupActivity.this, TabMenuActivity.class);
+                                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                                 startActivity(intent);
                             }
                             @Override
