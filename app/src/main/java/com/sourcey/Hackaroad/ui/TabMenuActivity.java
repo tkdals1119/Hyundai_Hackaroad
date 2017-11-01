@@ -1,5 +1,7 @@
 package com.sourcey.Hackaroad.ui;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -7,9 +9,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.sourcey.Hackaroad.R;
+import com.sourcey.Hackaroad.SignupActivity;
+import com.sourcey.Hackaroad.model.Driver;
 import com.sourcey.Hackaroad.service.BackPressCloseHandler;
+import com.sourcey.Hackaroad.utils.ApiRequester;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -18,6 +24,9 @@ import it.neokree.materialtabs.MaterialTabListener;
 public class TabMenuActivity extends ActionBarActivity implements MaterialTabListener {
 
     private BackPressCloseHandler backPressCloseHandle;
+
+    SharedPreferences setting;
+    SharedPreferences.Editor editor;
 
     MaterialTabHost tabHost;
     ViewPager pager;
@@ -29,10 +38,20 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
         setContentView(R.layout.activity_tabmenu_activity);
         backPressCloseHandle = new BackPressCloseHandler(this);
 
+        setting = getSharedPreferences("setting", MODE_PRIVATE);
+        editor= setting.edit();
+
+        ApiRequester.getInstance().signUpDriver(Driver.getInstance().getDriver(), new ApiRequester.UserCallback<Driver>() {
+            @Override
+            public void onSuccess(Driver result) {
+            }
+            @Override
+            public void onFail() {
+            }
+        });
 
         Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
-        this.setSupportActionBar(toolbar);
-        toolbar.setTitle("일해라노예야");
+        toolbar.setTitle(setting.getString("Id", ""));
 
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
         pager = (ViewPager) this.findViewById(R.id.pager);

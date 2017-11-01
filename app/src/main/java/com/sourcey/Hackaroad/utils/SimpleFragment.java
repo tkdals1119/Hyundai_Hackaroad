@@ -12,6 +12,10 @@ import com.github.mikephil.charting.charts.ScatterChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.BubbleData;
+import com.github.mikephil.charting.data.BubbleDataSet;
+import com.github.mikephil.charting.data.BubbleEntry;
+import com.github.mikephil.charting.data.CombinedData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -34,172 +38,108 @@ import java.util.ArrayList;
 
 public class SimpleFragment extends Fragment {
 
-    protected String[] mParties = new String[] {
-            "Party A", "Party B", "Party C", "Party D", "Party E", "Party F", "Party G", "Party H",
-            "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
-            "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
-            "Party Y", "Party Z"
-    };
-
-    private Typeface tf;
-
-    public SimpleFragment() {
-
-    }
+    protected Typeface mTfRegular;
+    protected Typeface mTfLight;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mTfRegular = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
+        mTfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
     }
 
-    protected BarData generateBarData(int dataSets, float range, int count) {
+    public LineData generateLineData(ArrayList<Integer> y) {
 
-        ArrayList<IBarDataSet> sets = new ArrayList<IBarDataSet>();
+        ArrayList<Entry> entries = new ArrayList<>();
 
-        for(int i = 0; i < dataSets; i++) {
-
-            ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
-
-//            entries = FileUtils.loadEntriesFromAssets(getActivity().getAssets(), "stacked_bars.txt");
-
-            for(int j = 0; j < count; j++) {
-                entries.add(new BarEntry(j, (float) (Math.random() * range) + range / 4));
-            }
-
-            BarDataSet ds = new BarDataSet(entries, getLabel(i));
-            ds.setColors(ColorTemplate.VORDIPLOM_COLORS);
-            sets.add(ds);
+        for (int i = 0; i < y.size(); i++) {
+            entries.add(new Entry(i, y.get(i)));
         }
 
-        BarData d = new BarData(sets);
-        d.setValueTypeface(tf);
-        return d;
+        LineDataSet d = new LineDataSet(entries, "");
+        d.setLineWidth(2.5f);
+        d.setCircleRadius(4.5f);
+        d.setHighLightColor(Color.rgb(244, 117, 117));
+        d.setDrawValues(false);
+
+        LineData cd = new LineData(d);
+        return cd;
     }
 
-    protected ScatterData generateScatterData(int dataSets, float range, int count) {
+    public BarData generateBarData(ArrayList<Double> y) {
 
-        ArrayList<IScatterDataSet> sets = new ArrayList<IScatterDataSet>();
+        ArrayList<BarEntry> entries = new ArrayList<>();
 
-        ScatterChart.ScatterShape[] shapes = ScatterChart.ScatterShape.getAllDefaultShapes();
-
-        for(int i = 0; i < dataSets; i++) {
-
-            ArrayList<Entry> entries = new ArrayList<Entry>();
-
-            for(int j = 0; j < count; j++) {
-                entries.add(new Entry(j, (float) (Math.random() * range) + range / 4));
-            }
-
-            ScatterDataSet ds = new ScatterDataSet(entries, getLabel(i));
-            ds.setScatterShapeSize(12f);
-            ds.setScatterShape(shapes[i % shapes.length]);
-            ds.setColors(ColorTemplate.COLORFUL_COLORS);
-            ds.setScatterShapeSize(9f);
-            sets.add(ds);
+        for (int i = 0; i < y.size(); i++) {
+            entries.add(new BarEntry(i, y.get(i).intValue()));
         }
 
-        ScatterData d = new ScatterData(sets);
-        d.setValueTypeface(tf);
-        return d;
+        BarDataSet d = new BarDataSet(entries, "");
+        d.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        d.setHighLightAlpha(255);
+
+        BarData cd = new BarData(d);
+        cd.setBarWidth(0.9f);
+        return cd;
     }
 
-    /**
-     * generates less data (1 DataSet, 4 values)
-     * @return
-     */
-    protected PieData generatePieData() {
+    public PieData generatePieData(ArrayList<Integer> values, String[] marker) {
 
-        int count = 6;
+        ArrayList<PieEntry> entries = new ArrayList<>();
 
-        ArrayList<PieEntry> entries1 = new ArrayList<PieEntry>();
-
-        for(int i = 0; i < count; i++) {
-            entries1.add(new PieEntry((float) ((Math.random() * 60) + 40), "Quarter " + (i+1)));
+        for (int i = 0; i < marker.length; i++) {
+            entries.add(new PieEntry(values.get(i), marker[i]));
         }
 
-        PieDataSet ds1 = new PieDataSet(entries1, "Quarterly Revenues 2015");
-        ds1.setColors(ColorTemplate.VORDIPLOM_COLORS);
-        ds1.setSliceSpace(2f);
-        ds1.setValueTextColor(Color.WHITE);
-        ds1.setValueTextSize(12f);
+        PieDataSet d = new PieDataSet(entries, "");
 
-        PieData d = new PieData(ds1);
-        d.setValueTypeface(tf);
+        // space between slices
+        d.setSliceSpace(10f);
+        d.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        d.setValueLinePart1OffsetPercentage(80.f);
+        d.setValueLinePart1Length(0.2f);
+        d.setValueLinePart2Length(0.4f);
+        d.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+
+        PieData cd = new PieData(d);
+        return cd;
+    }
+
+
+    public BubbleData generateBubbleata(ArrayList<Integer> values) {
+
+        ArrayList<BubbleEntry> entries = new ArrayList<>();
+
+        for (int i = 0; i < values.size(); i++) {
+            float val = values.get(i);
+            float size = values.get(i);
+
+            entries.add(new BubbleEntry(i, val, size));
+        }
+
+        BubbleDataSet d = new BubbleDataSet(entries, "Bubble DataSet");
+
+        d.setColors(ColorTemplate.COLORFUL_COLORS);
+        d.setValueTextSize(10f);
+        d.setValueTextColor(Color.WHITE);
+        d.setHighlightCircleWidth(1.5f);
+        d.setDrawValues(true);
+
+        BubbleData bd = new BubbleData(d);
+        return bd;
+    }
+
+    public CombinedData generateCombinedData(LineData lineData, BarData barData) {
+
+        CombinedData d = new CombinedData();
+
+        d.setData(lineData);
+        d.setData(barData);
+        d.setValueTypeface(mTfLight);
 
         return d;
     }
 
-    protected LineData generateLineData() {
-
-        ArrayList<ILineDataSet> sets = new ArrayList<ILineDataSet>();
-
-        LineDataSet ds1 = new LineDataSet(FileUtils.loadEntriesFromAssets(getActivity().getAssets(), "sine.txt"), "Sine function");
-        LineDataSet ds2 = new LineDataSet(FileUtils.loadEntriesFromAssets(getActivity().getAssets(), "cosine.txt"), "Cosine function");
-
-        ds1.setLineWidth(2f);
-        ds2.setLineWidth(2f);
-
-        ds1.setDrawCircles(false);
-        ds2.setDrawCircles(false);
-
-        ds1.setColor(ColorTemplate.VORDIPLOM_COLORS[0]);
-        ds2.setColor(ColorTemplate.VORDIPLOM_COLORS[1]);
-
-        // load DataSets from textfiles in assets folders
-        sets.add(ds1);
-        sets.add(ds2);
-
-        LineData d = new LineData(sets);
-        d.setValueTypeface(tf);
-        return d;
-    }
-
-    protected LineData getComplexity() {
-
-        ArrayList<ILineDataSet> sets = new ArrayList<ILineDataSet>();
-
-        LineDataSet ds1 = new LineDataSet(FileUtils.loadEntriesFromAssets(getActivity().getAssets(), "n.txt"), "O(n)");
-        LineDataSet ds2 = new LineDataSet(FileUtils.loadEntriesFromAssets(getActivity().getAssets(), "nlogn.txt"), "O(nlogn)");
-        LineDataSet ds3 = new LineDataSet(FileUtils.loadEntriesFromAssets(getActivity().getAssets(), "square.txt"), "O(n\u00B2)");
-        LineDataSet ds4 = new LineDataSet(FileUtils.loadEntriesFromAssets(getActivity().getAssets(), "three.txt"), "O(n\u00B3)");
-
-        ds1.setColor(ColorTemplate.VORDIPLOM_COLORS[0]);
-        ds2.setColor(ColorTemplate.VORDIPLOM_COLORS[1]);
-        ds3.setColor(ColorTemplate.VORDIPLOM_COLORS[2]);
-        ds4.setColor(ColorTemplate.VORDIPLOM_COLORS[3]);
-
-        ds1.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[0]);
-        ds2.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[1]);
-        ds3.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[2]);
-        ds4.setCircleColor(ColorTemplate.VORDIPLOM_COLORS[3]);
-
-        ds1.setLineWidth(2.5f);
-        ds1.setCircleRadius(3f);
-        ds2.setLineWidth(2.5f);
-        ds2.setCircleRadius(3f);
-        ds3.setLineWidth(2.5f);
-        ds3.setCircleRadius(3f);
-        ds4.setLineWidth(2.5f);
-        ds4.setCircleRadius(3f);
-
-
-        // load DataSets from textfiles in assets folders
-        sets.add(ds1);
-        sets.add(ds2);
-        sets.add(ds3);
-        sets.add(ds4);
-
-        LineData d = new LineData(sets);
-        d.setValueTypeface(tf);
-        return d;
-    }
-
-    private String[] mLabels = new String[] { "Company A", "Company B", "Company C", "Company D", "Company E", "Company F" };
-//    private String[] mXVals = new String[] { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec" };
-
-    private String getLabel(int i) {
-        return mLabels[i];
-    }
 }
-

@@ -141,6 +141,12 @@ public class ApiRequester {
         call.enqueue(new ResultCallback(userCallback));
     }
 
+    // 운전자 정보 가져오기
+    public void getStudent(String driver, UserCallback<Driver> userCallback){
+        Call<Driver> call = driverServerApi.getDriver(parser.parse(gson.toJson(driver)).getAsJsonObject());
+        call.enqueue(new ObjectCallback<>(userCallback));
+    }
+
 //    // 운전자 로그인
 //    public void loginDriver(Driver driver, UserCallback<Driver> userCallback) {
 //        Call<Driver> call = driverServerApi.loginDriver(   "driver",

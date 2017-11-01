@@ -1,5 +1,6 @@
 package com.sourcey.Hackaroad;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -21,6 +22,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
+
+    SharedPreferences setting;
+    SharedPreferences.Editor editor;
 
     private BackPressCloseHandler backPressCloseHandle;
 
@@ -50,11 +54,25 @@ public class LoginActivity extends AppCompatActivity {
             Driver.getInstance().setloginid(login_id);
             Driver.getInstance().setpassword(password);
 
+            if(Driver.getInstance().getLoginid()==null)
+            {
+                System.out.println("널이에요");
+            }
+            else
+            {
+                System.out.println("끄아아아아"+Driver.getInstance().getLoginid());
+            }
+            System.out.println("뀱"+login_id);
+
+
             ApiRequester.getInstance().checkDuplicateDriver(Driver.getInstance(), new ApiRequester.UserCallback<Boolean>() {
                 @Override
                 public void onSuccess(Boolean result) {
                     if(result)
                     {
+                        editor.putString("Id", Driver.getInstance().getLoginid());
+                        editor.commit();
+
                         Toast.makeText(LoginActivity.this, "로그인 완료!", Toast.LENGTH_SHORT).show();
 
                         Intent e = new Intent(LoginActivity.this, TabMenuActivity.class);
@@ -87,6 +105,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        setting = getSharedPreferences("setting", 0);
+        editor= setting.edit();
+
         backPressCloseHandle = new BackPressCloseHandler(this);
 
     }
@@ -96,38 +117,4 @@ public class LoginActivity extends AppCompatActivity {
         // Disable going back to the MainActivity
         backPressCloseHandle.onBackPressed();
     }
-//
-//    public void onLoginSuccess() {
-//        _loginButton.setEnabled(true);
-//        finish();
-//    }
-//
-//    public void onLoginFailed() {
-//        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-//
-//        _loginButton.setEnabled(true);
-//    }
-//
-//    public boolean validate() {
-//        boolean valid = true;
-//
-//        String email = _emailText.getText().toString();
-//        String password = _passwordText.getText().toString();
-//
-//        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//            _emailText.setError("enter a valid email address");
-//            valid = false;
-//        } else {
-//            _emailText.setError(null);
-//        }
-//
-//        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-//            _passwordText.setError("between 4 and 10 alphanumeric characters");
-//            valid = false;
-//        } else {
-//            _passwordText.setError(null);
-//        }
-//
-//        return valid;
-//    }
 }

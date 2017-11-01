@@ -1,4 +1,4 @@
-package com.sourcey.Hackaroad.model;
+package com.sourcey.Hackaroad.model.ChartItem;
 
 import android.content.Context;
 import android.view.View;

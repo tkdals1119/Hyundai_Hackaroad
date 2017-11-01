@@ -1,4 +1,4 @@
-package com.sourcey.Hackaroad.model;
+package com.sourcey.Hackaroad.model.ChartItem;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.sourcey.Hackaroad.R;
+import com.sourcey.Hackaroad.model.ChartItem.ChartItem;
 
 /**
  * Created by BSM on 2017-10-29.
@@ -65,12 +66,12 @@ public class PieChartItem extends ChartItem {
         holder.chart.setCenterTextTypeface(mTf);
         holder.chart.setCenterTextSize(9f);
         holder.chart.setUsePercentValues(true);
-        holder.chart.setExtraOffsets(5, 10, 50, 10);
+        holder.chart.setExtraOffsets(10, 10, 15, 10);
 
         mChartData.setValueFormatter(new PercentFormatter());
         mChartData.setValueTypeface(mTf);
         mChartData.setValueTextSize(11f);
-        mChartData.setValueTextColor(Color.WHITE);
+        mChartData.setValueTextColor(Color.BLACK);
         // set data
         holder.chart.setData((PieData) mChartData);
 
@@ -79,12 +80,14 @@ public class PieChartItem extends ChartItem {
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
+        l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
 
         // do not forget to refresh the chart
         // holder.chart.invalidate();
-        holder.chart.animateY(900);
+        holder.chart.animateX(750);
+        holder.chart.animateY(700);
 
         return convertView;
     }

@@ -29,6 +29,9 @@ public interface ServerApi {
     Call<ResponseBody> checkDuplicateDriver(	 @Query("loginid") String loginid,
                                                  @Query("password") String password);
 
+    @GET("/driver/get_name")
+    Call<Driver> getDriver(@Body JsonObject drvier);
+
 
 
     //test1

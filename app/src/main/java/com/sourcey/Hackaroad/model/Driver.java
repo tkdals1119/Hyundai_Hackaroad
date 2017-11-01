@@ -3,12 +3,14 @@ package com.sourcey.Hackaroad.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by BSM on 2017-10-25.
  */
 
 
-public class Driver {
+public class Driver implements Serializable {
 
     public volatile static Driver driver;
     private Driver() {}
