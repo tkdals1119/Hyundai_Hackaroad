@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.sourcey.Hackaroad.model.Driver;
 import com.sourcey.Hackaroad.service.BackPressCloseHandler;
+import com.sourcey.Hackaroad.ui.MapActivity;
 import com.sourcey.Hackaroad.ui.PieChartActivity;
 import com.sourcey.Hackaroad.ui.TabMenuActivity;
 import com.sourcey.Hackaroad.utils.ApiRequester;
