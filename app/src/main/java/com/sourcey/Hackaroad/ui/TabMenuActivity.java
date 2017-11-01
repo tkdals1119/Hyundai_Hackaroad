@@ -37,7 +37,7 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
         Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
         this.setSupportActionBar(toolbar);
         toolbar.setTitle("일해라노예야");
-        toolbar.setTitleTextColor(Color.parseColor("#000"));
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
 
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
         pager = (ViewPager) this.findViewById(R.id.pager);
