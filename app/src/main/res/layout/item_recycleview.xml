@@ -29,5 +29,16 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="false"
+            android:tint="@color/primary"
+            app:srcCompat="@drawable/ic_navigate_next_black_48dp" />
+
     </RelativeLayout>
 </layout>

@@ -36,7 +36,7 @@ public class Frag_ListActivity extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(10));
+        mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(5));
 
         mRecyclerView.scrollToPosition(0);
         mAdapter = new RecyclerAdapter(getActivity(), mMyData, new RecyclerItemClickListener() {
@@ -70,16 +70,16 @@ public class Frag_ListActivity extends Fragment {
         // for Test
         mMyData = new ArrayList<>();
         Recycler_item[] item = new Recycler_item[10];
-        item[0]=new Recycler_item("2017-10-26", "정지선 침범");
-        item[1]=new Recycler_item("2017-10-26", "방지턱 속도 감소 미시행");
-        item[2]=new Recycler_item("2017-10-27", "방향 지시등");
-        item[3]=new Recycler_item("2017-10-27", "정지선 침범");
-        item[4]=new Recycler_item("2017-10-28", "커브길 속도 감소 미시행");
-        item[5]=new Recycler_item("2017-10-26", "정지선 침범");
-        item[6]=new Recycler_item("2017-10-26", "방지턱 속도 감소 미시행");
-        item[7]=new Recycler_item("2017-10-27", "방향 지시등");
-        item[8]=new Recycler_item("2017-10-27", "정지선 침범");
-        item[9]=new Recycler_item("2017-10-28", "커브길 속도 감소 미시행");
+        item[0]=new Recycler_item("2017-10-26", "정지선 침범", R.drawable.ic_navigate_next_black_48dp);
+        item[1]=new Recycler_item("2017-10-26", "방지턱 속도 감소 미시행", R.drawable.ic_navigate_next_black_48dp);
+        item[2]=new Recycler_item("2017-10-27", "방향 지시등", R.drawable.ic_navigate_next_black_48dp);
+        item[3]=new Recycler_item("2017-10-27", "정지선 침범", R.drawable.ic_navigate_next_black_48dp);
+        item[4]=new Recycler_item("2017-10-28", "커브길 속도 감소 미시행", R.drawable.ic_navigate_next_black_48dp);
+        item[5]=new Recycler_item("2017-10-26", "정지선 침범", R.drawable.ic_navigate_next_black_48dp);
+        item[6]=new Recycler_item("2017-10-26", "방지턱 속도 감소 미시행", R.drawable.ic_navigate_next_black_48dp);
+        item[7]=new Recycler_item("2017-10-27", "방향 지시등", R.drawable.ic_navigate_next_black_48dp);
+        item[8]=new Recycler_item("2017-10-27", "정지선 침범", R.drawable.ic_navigate_next_black_48dp);
+        item[9]=new Recycler_item("2017-10-28", "커브길 속도 감소 미시행", R.drawable.ic_navigate_next_black_48dp);
 
         for(int i=0; i<10; i++) mMyData.add(item[i]);
     }

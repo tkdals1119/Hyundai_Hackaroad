@@ -7,12 +7,13 @@ package com.sourcey.Hackaroad.ui;
 public class Recycler_item {
     String date;
     String content;
+    int img;
 
 
-    Recycler_item(String date, String content){
+    Recycler_item(String date, String content, int img){
         this.date = date;
         this.content = content;
-
+        this.img = img;
     }
 
     public String getDate() {
@@ -31,4 +32,11 @@ public class Recycler_item {
         this.content = content;
     }
 
+    public int getImg() {
+        return img;
+    }
+
+    public void setImg(int img) {
+        this.img = img;
+    }
 }
