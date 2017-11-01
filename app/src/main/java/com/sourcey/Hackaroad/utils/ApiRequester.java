@@ -12,6 +12,7 @@ import com.sourcey.Hackaroad.service.ServerApi;
 
 import java.io.IOException;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -142,9 +143,9 @@ public class ApiRequester {
     }
 
     // 운전자 정보 가져오기
-    public void getStudent(String driver, UserCallback<Driver> userCallback){
-        Call<Driver> call = driverServerApi.getDriver(parser.parse(gson.toJson(driver)).getAsJsonObject());
-        call.enqueue(new ObjectCallback<>(userCallback));
+    public void getDriver(String userid, UserCallback<Driver> userCallback){
+        Call<Driver> call = driverServerApi.getDriver(userid);
+        call.enqueue(new ObjectCallback<Driver>(userCallback));
     }
 
 //    // 운전자 로그인

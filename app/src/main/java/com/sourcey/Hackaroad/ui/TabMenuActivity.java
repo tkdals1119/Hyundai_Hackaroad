@@ -9,8 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.sourcey.Hackaroad.LoginActivity;
 import com.sourcey.Hackaroad.R;
 import com.sourcey.Hackaroad.SignupActivity;
 import com.sourcey.Hackaroad.model.Driver;
@@ -32,26 +34,35 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
     ViewPager pager;
     ViewPagerAdapter adapter;
 
+//    private String username;
+    private String loginid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabmenu_activity);
+        final Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
         backPressCloseHandle = new BackPressCloseHandler(this);
 
         setting = getSharedPreferences("setting", MODE_PRIVATE);
         editor= setting.edit();
+        loginid = setting.getString("Id", "");
 
-        ApiRequester.getInstance().signUpDriver(Driver.getInstance().getDriver(), new ApiRequester.UserCallback<Driver>() {
+        Driver.getInstance().setloginid(setting.getString("Id", ""));
+
+        ApiRequester.getInstance().getDriver(Driver.getInstance().getLoginid(), new ApiRequester.UserCallback<Driver>() {
             @Override
             public void onSuccess(Driver result) {
+                System.out.println("이름은"+result.getname());
+                System.out.println("이름은"+result.getLoginid());
+
+                toolbar.setTitle(result.getname());
             }
             @Override
             public void onFail() {
             }
         });
 
-        Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
-        toolbar.setTitle(setting.getString("Id", ""));
 
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
         pager = (ViewPager) this.findViewById(R.id.pager);

@@ -42,16 +42,16 @@ public class Driver implements Serializable {
     @Expose
     private String id;
 
-    @SerializedName("name")
+    @SerializedName("username")
     @Expose
     private String name;
 
-    @SerializedName("loginid")
+    @SerializedName("userid")
     @Expose
     private String loginid;
 
 
-    @SerializedName("password")
+    @SerializedName("userpw")
     @Expose
     private String password;
 

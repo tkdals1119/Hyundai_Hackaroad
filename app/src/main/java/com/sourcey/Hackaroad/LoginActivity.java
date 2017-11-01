@@ -54,24 +54,17 @@ public class LoginActivity extends AppCompatActivity {
             Driver.getInstance().setloginid(login_id);
             Driver.getInstance().setpassword(password);
 
-            if(Driver.getInstance().getLoginid()==null)
-            {
-                System.out.println("널이에요");
-            }
-            else
-            {
-                System.out.println("끄아아아아"+Driver.getInstance().getLoginid());
-            }
-            System.out.println("뀱"+login_id);
-
-
             ApiRequester.getInstance().checkDuplicateDriver(Driver.getInstance(), new ApiRequester.UserCallback<Boolean>() {
                 @Override
                 public void onSuccess(Boolean result) {
                     if(result)
                     {
                         editor.putString("Id", Driver.getInstance().getLoginid());
+
+                        System.out.println("넣었다"+Driver.getInstance().getLoginid());
                         editor.commit();
+
+
 
                         Toast.makeText(LoginActivity.this, "로그인 완료!", Toast.LENGTH_SHORT).show();
 
@@ -105,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        setting = getSharedPreferences("setting", 0);
+        setting = getSharedPreferences("setting", MODE_PRIVATE);
         editor= setting.edit();
 
         backPressCloseHandle = new BackPressCloseHandler(this);
