@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sourcey.Hackaroad.R;
@@ -49,6 +50,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         holder.date.setText(mitems.get(position).getDate());
         holder.content.setText(mitems.get(position).getContent());
+        holder.img.setImageResource(mitems.get(position).getImg());
     }
 
     @Override
@@ -59,13 +61,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView date;
         TextView content;
-
+        ImageView img;
 
         public ViewHolder(View itemView){
             super(itemView);
             date = (TextView)itemView.findViewById(R.id.textView_date);
             content = (TextView)itemView.findViewById(R.id.textView_contents);
-
+            img = (ImageView)itemView.findViewById(R.id.imageView);
         }
 
 

@@ -28,11 +28,14 @@ public class VideoViewActivity extends AppCompatActivity {
         final VideoView videoView = (VideoView)findViewById(R.id.videoView);
         textView = (TextView)findViewById(R.id.textView);
 
-        mediaController = new MediaController(this);
-
         final int position = 0;
 
         Intent intent = getIntent();
+
+        String uriPath = "android.resource://"+ getPackageName()+"/raw/video";
+        Uri uri = Uri.parse(uriPath);
+        videoView.setVideoURI(uri);
+
 
 //        Set the videoView that acts as the anchor for the MediaController.
 //        mediaController.setAnchorView(videoView);
@@ -53,24 +56,26 @@ public class VideoViewActivity extends AppCompatActivity {
 //
 //        videoView.requestFocus();
 //
-//        // When the video file ready for playback.
+        // When the video file ready for playback.
 //        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 //            @Override
-//            public void onPrepared(MediaPlayer mp) {
-//                videoView.seekTo(position);
-//                if(position==0){
-//                    videoView.start();
-//                }
+//            public void onPrepared(MediaPlayer mediaPlayer) {
+//                mediaPlayer.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
+//                    @Override
+//                    public void onVideoSizeChanged(MediaPlayer mediaPlayer, int i, int i1) {
+//                        mediaController = new MediaController(VideoViewActivity.this);
+//                        videoView.setMediaController(mediaController);
+//                        mediaController.setAnchorView(videoView);
+//
+//                    }
+//                });
 //            }
 //        });
 
-        String uriPath = "android.resource://"+ getPackageName()+"/raw/video";
-        Uri uri = Uri.parse(uriPath);
-        videoView.setVideoURI(uri);
 
        final MediaController mediaController = new MediaController(this);
-        mediaController.setAnchorView(videoView);
-        videoView.setMediaController(mediaController);
+       mediaController.setAnchorView(videoView);
+       videoView.setMediaController(mediaController);
 
         videoView.start();
 
