@@ -13,23 +13,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-<<<<<<< HEAD
 import android.widget.Toast;
-=======
->>>>>>> ny
-
 import com.sourcey.Hackaroad.R;
-<<<<<<< HEAD
 import com.sourcey.Hackaroad.SplashActivity;
 import com.sourcey.Hackaroad.model.Case_List;
-=======
->>>>>>> ny
 import com.sourcey.Hackaroad.model.Driver;
 import com.sourcey.Hackaroad.service.BackPressCloseHandler;
 import com.sourcey.Hackaroad.utils.ApiRequester;
-
 import java.util.List;
-
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
