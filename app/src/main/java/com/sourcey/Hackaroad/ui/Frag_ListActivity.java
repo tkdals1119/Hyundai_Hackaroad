@@ -44,7 +44,7 @@ public class Frag_ListActivity extends Fragment {
             public void OnItemClick(View view, int position) {
                 Log.d("클릭", "Clicked Position" + position);
                 Intent intent = new Intent(getContext(), VideoViewActivity.class);
-                intent.putExtra("data", mMyData.get(position).date);
+                intent.putExtra("date", mMyData.get(position).date);
                 intent.putExtra("content", mMyData.get(position).content);
                 startActivity(intent);
             }

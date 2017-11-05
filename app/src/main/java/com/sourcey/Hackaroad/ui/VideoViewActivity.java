@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -21,9 +20,11 @@ import butterknife.OnClick;
  * Created by Jeong on 2017-10-30.
  */
 
-public class VideoViewActivity extends AppCompatActivity {
+public class VideoViewActivity extends AppCompatActivity{
     private MediaController mediaController;
-    private TextView textView;
+    private TextView textView_explain;
+    VideoView videoView;
+    String uriPath;
     private String date;
     private String content;
 
@@ -42,58 +43,30 @@ public class VideoViewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        final VideoView videoView = (VideoView)findViewById(R.id.videoView);
-        textView = (TextView)findViewById(R.id.textView);
+        videoView = (VideoView)findViewById(R.id.videoView);
+        textView_explain = (TextView)findViewById(R.id.textView);
 
-        final int position = 0;
+        final int id = 0;
 
         Intent intent = getIntent();
+        date = intent.getStringExtra("date");
+        content = intent.getStringExtra("content");
 
-        String uriPath = "android.resource://"+ getPackageName()+"/raw/video";
+        uriPath = "android.resource://"+ getPackageName()+"/raw/video" + id;
+        //String uriPath = "rtsp://127.0.0.1:80/dinosaur.mp4";
+
         Uri uri = Uri.parse(uriPath);
+
         videoView.setVideoURI(uri);
+        textView_explain.setText(" " + date + " " + content + " " + "17시 30분 ");
 
 
-//        Set the videoView that acts as the anchor for the MediaController.
-//        mediaController.setAnchorView(videoView);
-//
-//
-//        // Set MediaController for VideoView
-//        videoView.setMediaController(mediaController);
-//
-//        try {
-//            // ID of video file.
-//            int id = this.getRawResIdByName("video");
-//            videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + id));
-//
-//        } catch (Exception e) {
-//            Log.e("Error", e.getMessage());
-//            e.printStackTrace();
-//        }
-//
-//        videoView.requestFocus();
-//
-        // When the video file ready for playback.
-//        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mediaPlayer) {
-//                mediaPlayer.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
-//                    @Override
-//                    public void onVideoSizeChanged(MediaPlayer mediaPlayer, int i, int i1) {
-//                        mediaController = new MediaController(VideoViewActivity.this);
-//                        videoView.setMediaController(mediaController);
-//                        mediaController.setAnchorView(videoView);
-//
-//                    }
-//                });
-//            }
-//        });
+        //잠시
+        mediaController = new MediaController(this);
+        mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
 
-
-       final MediaController mediaController = new MediaController(this);
-       mediaController.setAnchorView(videoView);
-       videoView.setMediaController(mediaController);
-
+        videoView.requestFocus();
         videoView.start();
 
         videoView.postDelayed(new Runnable() {
@@ -104,13 +77,4 @@ public class VideoViewActivity extends AppCompatActivity {
             }
         }, 100);
     }
-
-//    // Find ID corresponding to the name of the resource (in the directory raw).
-//    public int getRawResIdByName(String resName) {
-//        String pkgName = this.getPackageName();
-//        // Return 0 if not found.
-//        int resID = this.getResources().getIdentifier(resName, "raw", pkgName);
-//        Log.i("AndroidVideoView", "Res Name: " + resName + "==> Res ID = " + resID);
-//        return resID;
-
 }
