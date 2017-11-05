@@ -1,10 +1,12 @@
 package com.sourcey.Hackaroad.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -14,7 +16,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.sourcey.Hackaroad.LoginActivity;
 import com.sourcey.Hackaroad.R;
+import com.sourcey.Hackaroad.SplashActivity;
 import com.sourcey.Hackaroad.model.Case_List;
 import com.sourcey.Hackaroad.model.Driver;
 import com.sourcey.Hackaroad.service.BackPressCloseHandler;
@@ -29,8 +33,6 @@ import it.neokree.materialtabs.MaterialTabListener;
 public class TabMenuActivity extends ActionBarActivity implements MaterialTabListener{
 
     private BackPressCloseHandler backPressCloseHandle;
-    FragmentTransaction fragmentTransaction;
-
 
     SharedPreferences setting;
     SharedPreferences.Editor editor;
@@ -40,10 +42,9 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
     ViewPagerAdapter adapter;
     Resources res;
 
-//    private String username;
     private String loginid;
-    private String list_arr[];
-    private String list_habit_arr[];
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,44 +70,6 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
             public void onFail() {
             }
         });
-
-        ApiRequester.getInstance().getList(new ApiRequester.UserCallback<List<Case_List>>() {
-            @Override
-            public void onSuccess(List<Case_List> result) {
-                    if(result==null)
-                    {
-                        Toast.makeText(TabMenuActivity.this, "정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        int size = result.size();
-                        list_arr = new String[size];
-                        int count = 0;
-
-                        for(Case_List list : result)
-                        {
-                            list_arr[count] = list.gethabbitname();
-                            count++;
-                        }
-                                for(int i=0; i<list_arr.length; i++)
-                                    {
-                                               System.out.println(i+"number"+list_arr[i]);
-                                    }
-
-                    }
-            }
-            @Override
-            public void onFail() {
-            }
-        });
-
-        Frag_ListActivity frament = new Frag_ListActivity();
-        Bundle bundle = new Bundle();
-        bundle.putInt("id", 1);
-        frament.setArguments(bundle);
-
-        int test = bundle.getInt("id");
-        System.out.println("테스트"+test);
 
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
         pager = (ViewPager) this.findViewById(R.id.pager);
@@ -138,19 +101,8 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
         pager.setCurrentItem(tab.getPosition());
     }
 
-    public void setMyData(String[] habitname) {
-        this.list_habit_arr = habitname;
-        getMyData();
-    }
-
-    public String[] getMyData()
-    {
-        return list_habit_arr;
-    }
-
     @Override
     public void onTabReselected(MaterialTab tab) {
-
     }
 
     @Override
@@ -161,7 +113,6 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
 
     @Override
     public void onTabUnselected(MaterialTab tab) {
-
     }
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {

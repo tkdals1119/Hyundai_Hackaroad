@@ -31,9 +31,11 @@ public interface ServerApi {
     Call<ResponseBody> checkDuplicateDriver(	 @Query("userid") String userid,
                                                  @Query("userpw") String userpw);
 
+    // 운전자 이름 가져오기
     @GET("/driver/{userid}/get_name")
     Call<Driver> getDriver(@Path("userid") String userid);
 
+    // 운전 습관 리스트
     @GET("/driver/get_list")
     Call<List<Case_List>> getList();
 
