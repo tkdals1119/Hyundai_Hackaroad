@@ -1,6 +1,5 @@
 package com.sourcey.Hackaroad.ui;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -9,18 +8,19 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.sourcey.Hackaroad.LoginActivity;
 import com.sourcey.Hackaroad.R;
-import com.sourcey.Hackaroad.SignupActivity;
+import com.sourcey.Hackaroad.model.Case_List;
 import com.sourcey.Hackaroad.model.Driver;
 import com.sourcey.Hackaroad.service.BackPressCloseHandler;
 import com.sourcey.Hackaroad.utils.ApiRequester;
+
+import java.util.List;
 
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
@@ -29,6 +29,8 @@ import it.neokree.materialtabs.MaterialTabListener;
 public class TabMenuActivity extends ActionBarActivity implements MaterialTabListener{
 
     private BackPressCloseHandler backPressCloseHandle;
+    FragmentTransaction fragmentTransaction;
+
 
     SharedPreferences setting;
     SharedPreferences.Editor editor;
@@ -40,6 +42,8 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
 
 //    private String username;
     private String loginid;
+    private String list_arr[];
+    private String list_habit_arr[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,6 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
 
         backPressCloseHandle = new BackPressCloseHandler(this);
 
-
         setting = getSharedPreferences("setting", MODE_PRIVATE);
         editor= setting.edit();
         loginid = setting.getString("Id", "");
@@ -60,9 +63,6 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
         ApiRequester.getInstance().getDriver(Driver.getInstance().getLoginid(), new ApiRequester.UserCallback<Driver>() {
             @Override
             public void onSuccess(Driver result) {
-                System.out.println("이름은"+result.getname());
-                System.out.println("이름은"+result.getLoginid());
-
                 toolbar.setTitle(result.getname());
             }
             @Override
@@ -70,10 +70,46 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
             }
         });
 
+        ApiRequester.getInstance().getList(new ApiRequester.UserCallback<List<Case_List>>() {
+            @Override
+            public void onSuccess(List<Case_List> result) {
+                    if(result==null)
+                    {
+                        Toast.makeText(TabMenuActivity.this, "정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        int size = result.size();
+                        list_arr = new String[size];
+                        int count = 0;
+
+                        for(Case_List list : result)
+                        {
+                            list_arr[count] = list.gethabbitname();
+                            count++;
+                        }
+                                for(int i=0; i<list_arr.length; i++)
+                                    {
+                                               System.out.println(i+"number"+list_arr[i]);
+                                    }
+
+                    }
+            }
+            @Override
+            public void onFail() {
+            }
+        });
+
+        Frag_ListActivity frament = new Frag_ListActivity();
+        Bundle bundle = new Bundle();
+        bundle.putInt("id", 1);
+        frament.setArguments(bundle);
+
+        int test = bundle.getInt("id");
+        System.out.println("테스트"+test);
 
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
         pager = (ViewPager) this.findViewById(R.id.pager);
-
 
         // init view pager
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -102,6 +138,16 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
         pager.setCurrentItem(tab.getPosition());
     }
 
+    public void setMyData(String[] habitname) {
+        this.list_habit_arr = habitname;
+        getMyData();
+    }
+
+    public String[] getMyData()
+    {
+        return list_habit_arr;
+    }
+
     @Override
     public void onTabReselected(MaterialTab tab) {
 
@@ -117,7 +163,6 @@ public class TabMenuActivity extends ActionBarActivity implements MaterialTabLis
     public void onTabUnselected(MaterialTab tab) {
 
     }
-
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 

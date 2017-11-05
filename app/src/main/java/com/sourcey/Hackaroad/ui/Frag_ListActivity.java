@@ -1,6 +1,8 @@
 package com.sourcey.Hackaroad.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,8 @@ import com.sourcey.Hackaroad.R;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by BSM on 2017-10-26.
  */
@@ -26,9 +30,9 @@ public class Frag_ListActivity extends Fragment {
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Recycler_item> mMyData;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
 
         View view = inflater.inflate(R.layout.activity_frag_list, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
@@ -52,8 +56,16 @@ public class Frag_ListActivity extends Fragment {
 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//
+//        Bundle extra = getArguments();
+//        int id = extra.getInt("id");
+//
+//        System.out.println("제발"+id);
+
 
         return view;
+
+
     }
 
     @Override
@@ -67,6 +79,7 @@ public class Frag_ListActivity extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
     private void initDataSet(){
+
         // for Test
         mMyData = new ArrayList<>();
         Recycler_item[] item = new Recycler_item[10];
@@ -80,7 +93,6 @@ public class Frag_ListActivity extends Fragment {
         item[7]=new Recycler_item("2017-10-27", "방향 지시등", R.drawable.ic_navigate_next_black_48dp);
         item[8]=new Recycler_item("2017-10-27", "정지선 침범", R.drawable.ic_navigate_next_black_48dp);
         item[9]=new Recycler_item("2017-10-28", "커브길 속도 감소 미시행", R.drawable.ic_navigate_next_black_48dp);
-
         for(int i=0; i<10; i++) mMyData.add(item[i]);
     }
 }

@@ -7,12 +7,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.sourcey.Hackaroad.LoginActivity;
+import com.sourcey.Hackaroad.model.Case_List;
 import com.sourcey.Hackaroad.model.Driver;
 import com.sourcey.Hackaroad.service.ServerApi;
 
 import java.io.IOException;
+import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -146,6 +147,13 @@ public class ApiRequester {
     public void getDriver(String userid, UserCallback<Driver> userCallback){
         Call<Driver> call = driverServerApi.getDriver(userid);
         call.enqueue(new ObjectCallback<Driver>(userCallback));
+    }
+
+    // 운전 습관 리스트 가져오기
+    public void getList(UserCallback<List<Case_List>> userCallback)
+    {
+        Call<List<Case_List>> call = driverServerApi.getList();
+        call.enqueue(new ObjectCallback<>(userCallback));
     }
 
 //    // 운전자 로그인
