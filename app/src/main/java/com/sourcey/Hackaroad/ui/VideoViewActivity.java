@@ -25,8 +25,12 @@ public class VideoViewActivity extends AppCompatActivity{
     private TextView textView_explain;
     VideoView videoView;
     String uriPath;
+    private int id;
     private String date;
     private String content;
+    private String site;
+    private String time;
+
 
     @BindView(R.id.mapBt) ImageButton mapBt;
     @OnClick(R.id.mapBt)
@@ -46,11 +50,13 @@ public class VideoViewActivity extends AppCompatActivity{
         videoView = (VideoView)findViewById(R.id.videoView);
         textView_explain = (TextView)findViewById(R.id.textView);
 
-        final int id = 0;
-
         Intent intent = getIntent();
+        id = 1;
         date = intent.getStringExtra("date");
         content = intent.getStringExtra("content");
+        site = "백제대로 567";
+        time = "17시 30분";
+
 
         uriPath = "android.resource://"+ getPackageName()+"/raw/video" + id;
         //String uriPath = "rtsp://127.0.0.1:80/dinosaur.mp4";
@@ -58,7 +64,7 @@ public class VideoViewActivity extends AppCompatActivity{
         Uri uri = Uri.parse(uriPath);
 
         videoView.setVideoURI(uri);
-        textView_explain.setText(" " + date + " " + content + " " + "17시 30분 ");
+        textView_explain.setText(" " + date + " " + content + " " + site + "에서 " + time + "에 발생");
 
 
         //잠시
