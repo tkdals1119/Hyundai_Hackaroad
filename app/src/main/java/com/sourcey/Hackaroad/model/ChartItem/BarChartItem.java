@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -18,6 +19,7 @@ import com.sourcey.Hackaroad.R;
 
 public class BarChartItem extends ChartItem {
     private Typeface mTf;
+
 
     public BarChartItem(ChartData<?> cd, Context c) {
         super(cd);
@@ -42,6 +44,8 @@ public class BarChartItem extends ChartItem {
             convertView = LayoutInflater.from(c).inflate(
                     R.layout.list_item_barchart, null);
             holder.chart = (BarChart) convertView.findViewById(R.id.chart);
+            holder.textView_barchart = (TextView)convertView.findViewById(R.id.textView_barchart);
+            holder.textView_barchart.setText("Barchart!!!!!!!!!");
 
             convertView.setTag(holder);
 
@@ -82,5 +86,6 @@ public class BarChartItem extends ChartItem {
 
     private static class ViewHolder {
         BarChart chart;
+        TextView textView_barchart;
     }
 }

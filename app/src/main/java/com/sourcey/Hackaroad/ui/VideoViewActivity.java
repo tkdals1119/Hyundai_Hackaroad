@@ -51,7 +51,7 @@ public class VideoViewActivity extends AppCompatActivity{
         textView_explain = (TextView)findViewById(R.id.textView);
 
         Intent intent = getIntent();
-        id = 1;
+        id = 2;
         date = intent.getStringExtra("date");
         content = intent.getStringExtra("content");
         site = "백제대로 567";
@@ -72,14 +72,13 @@ public class VideoViewActivity extends AppCompatActivity{
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
 
-        videoView.requestFocus();
         videoView.start();
 
         videoView.postDelayed(new Runnable() {
             @Override
             public void run() {
                 mediaController.show(0);
-                videoView.pause();
+                //videoView.pause();
             }
         }, 100);
     }

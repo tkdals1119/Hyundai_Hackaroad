@@ -1,11 +1,8 @@
 package com.sourcey.Hackaroad.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -26,8 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by BSM on 2017-10-26.
@@ -153,6 +148,7 @@ public class Frag_ListActivity extends Fragment {
         for(int i=0; i<size; i++)
         {
             item[i]=new Recycler_item(list_habit_date_arr[i], list_habit_arr[i], R.drawable.ic_navigate_next_black_48dp);
+
         }
         for(int i=0; i<size; i++) mMyData.add(item[i]);
     }
