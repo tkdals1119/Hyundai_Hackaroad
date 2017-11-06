@@ -29,11 +29,12 @@ public class Case_List implements Serializable {
         return list;
     }
 
-    public Case_List(String id, String habbitname, String date)
+    public Case_List(String id, String habbitname, String date, String latitude, String longtitude)
     {
         this.setId(id);
         this.sethabbitname(habbitname);
         this.setcreated_at(date);
+
     }
 
     @SerializedName("id")
@@ -47,6 +48,14 @@ public class Case_List implements Serializable {
     @SerializedName("created_at")
     @Expose
     private String created_at;
+
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+
+    @SerializedName("longtitude")
+    @Expose
+    private String longtitude;
 
 
     public static Case_List getList()
@@ -89,5 +98,24 @@ public class Case_List implements Serializable {
         this.created_at=created_at;
     }
 
+    public String getlatitude()
+    {
+        return latitude;
+    }
+
+    public void setlatitude(String latitude)
+    {
+        this.latitude=latitude;
+    }
+
+    public String getlongtitude()
+    {
+        return longtitude;
+    }
+
+    public void setlongtitude(String longtitude)
+    {
+        this.longtitude=longtitude;
+    }
 
 }
