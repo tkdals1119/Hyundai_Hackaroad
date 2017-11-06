@@ -1,5 +1,6 @@
 package com.sourcey.Hackaroad.ui;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,10 +17,18 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     GoogleMap mMap;
 
+    private String latitude;
+    private String longtitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        Intent intent = getIntent();
+        this.latitude = intent.getStringExtra("latitude");
+        this.longtitude = intent.getStringExtra("longtitude");
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -31,7 +40,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap = googleMap;
 
         // 서울 여의도에 대한 위치 설정
-        LatLng seoul = new LatLng(35.8468290, 127.1293630); // latitude 위도, longtitude 경도
+        LatLng seoul = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longtitude)); // latitude 위도, longtitude 경도
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(seoul,16));
 
