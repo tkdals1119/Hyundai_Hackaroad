@@ -1,7 +1,9 @@
 package com.sourcey.Hackaroad.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.sourcey.Hackaroad.R;
 import com.sourcey.Hackaroad.model.Case_List;
 import com.sourcey.Hackaroad.utils.ApiRequester;
@@ -41,6 +44,7 @@ public class Frag_ListActivity extends Fragment {
     private String[] list_habit_arr;
     private String[] list_habit_date_arr;
 
+    Context context;
 
     Activity root = getActivity();
 

@@ -33,10 +33,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'it.neokree:MaterialTabs:0.11'
-
+    compile 'com.github.lzyzsd:circleprogress:1.2.1'
+    compile 'com.pnikosis:materialish-progress:1.7'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-
-
     compile 'com.google.android.gms:play-services-maps:10.2.0'
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'

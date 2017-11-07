@@ -31,7 +31,7 @@ public class Frag_StatisticsActivity extends SimpleFragment {
     ArrayList<Integer> myhabbit = new ArrayList<>();
     ArrayList<Double> myhabbit2 = new ArrayList<>();
 
-    String[] marker = {"한 손 운전","정지선 침범","과속방지턱", "경사로 주차", "급정거"};
+    String[] marker = {"한 손 운전","정지선 미준수","과속방지턱", "경사로 주차", "급정거"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,10 +51,12 @@ public class Frag_StatisticsActivity extends SimpleFragment {
             myhabbit.add(i, 0);
         }
 
-        for(int j=0; j<11; j++)
+        for(int j=0; j<10; j++)
         {
+            int random = (int) (Math.random()*10);
+
             myhabbit2.add(j, 0.0);
-            myhabbit2.set(j, j*1.5);
+            myhabbit2.set(j, Double.valueOf(random));
         }
 
         myhabbit.set(0, 5);
@@ -62,9 +64,6 @@ public class Frag_StatisticsActivity extends SimpleFragment {
         myhabbit.set(2, 3);
         myhabbit.set(3, 2);
         myhabbit.set(4, 4);
-
-
-
     }
 
     private void setView() {
