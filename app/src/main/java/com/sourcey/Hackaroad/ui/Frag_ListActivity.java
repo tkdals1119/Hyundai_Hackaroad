@@ -73,6 +73,7 @@ public class Frag_ListActivity extends Fragment {
                 Intent intent = new Intent(getContext(), VideoViewActivity.class);
                 intent.putExtra("date", mMyData.get(position).date);
                 intent.putExtra("content", mMyData.get(position).content);
+                intent.putExtra("position", position);
                 startActivity(intent);
             }
         });
