@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -16,7 +17,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.sourcey.Hackaroad.R;
-import com.sourcey.Hackaroad.model.ChartItem.ChartItem;
 
 /**
  * Created by BSM on 2017-10-29.
@@ -51,7 +51,8 @@ public class PieChartItem extends ChartItem {
             convertView = LayoutInflater.from(c).inflate(
                     R.layout.list_item_piechart, null);
             holder.chart = (PieChart) convertView.findViewById(R.id.chart);
-
+            holder.textView_piechart = (TextView)convertView.findViewById(R.id.textView_piechart);
+            holder.textView_piechart.setText("Piechart!!!!!!!!!");
             convertView.setTag(holder);
 
         } else {
@@ -66,12 +67,13 @@ public class PieChartItem extends ChartItem {
         holder.chart.setCenterTextTypeface(mTf);
         holder.chart.setCenterTextSize(9f);
         holder.chart.setUsePercentValues(true);
-        holder.chart.setExtraOffsets(10, 10, 15, 10);
+        holder.chart.setExtraOffsets(0, 20, 10, 0);
 
         mChartData.setValueFormatter(new PercentFormatter());
         mChartData.setValueTypeface(mTf);
         mChartData.setValueTextSize(11f);
         mChartData.setValueTextColor(Color.BLACK);
+
         // set data
         holder.chart.setData((PieData) mChartData);
 
@@ -95,7 +97,7 @@ public class PieChartItem extends ChartItem {
     private SpannableString generateCenterText() {
         SpannableString s = new SpannableString("MPAndroidChart\ncreated by\nPhilipp Jahoda");
         s.setSpan(new RelativeSizeSpan(1.6f), 0, 14, 0);
-        s.setSpan(new ForegroundColorSpan(ColorTemplate.VORDIPLOM_COLORS[0]), 0, 14, 0);
+        s.setSpan(new ForegroundColorSpan(ColorTemplate.JOYFUL_COLORS[0]), 0, 14, 0);
         s.setSpan(new RelativeSizeSpan(.9f), 14, 25, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, 25, 0);
         s.setSpan(new RelativeSizeSpan(1.4f), 25, s.length(), 0);
@@ -105,6 +107,7 @@ public class PieChartItem extends ChartItem {
 
     private static class ViewHolder {
         PieChart chart;
+        TextView textView_piechart;
     }
 }
 

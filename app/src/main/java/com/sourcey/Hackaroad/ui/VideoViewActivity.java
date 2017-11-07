@@ -1,6 +1,7 @@
 package com.sourcey.Hackaroad.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +20,6 @@ import com.sourcey.Hackaroad.R;
 import com.sourcey.Hackaroad.model.Case_List;
 import com.sourcey.Hackaroad.utils.ApiRequester;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,7 +36,15 @@ import butterknife.OnClick;
 public class VideoViewActivity extends AppCompatActivity {
     private static final String TAG = "VideoViewActivity";
     private MediaController mediaController;
-    private TextView textView_explain;
+    private TextView textView1;
+    private TextView textView2;
+    private TextView textView3;
+    private TextView textView4;
+
+
+    // d임시
+    private ImageView imageView_error;
+
     VideoView videoView;
     String uriPath;
     private int id;
@@ -140,16 +149,37 @@ public class VideoViewActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoview);
+
         videoView = (VideoView) findViewById(R.id.videoView);
-        textView_explain = (TextView) findViewById(R.id.textView);
+        textView1 = (TextView) findViewById(R.id.textView1);
+        textView2 = (TextView) findViewById(R.id.textView2);
+        textView3 = (TextView) findViewById(R.id.textView3);
+        textView4 = (TextView) findViewById(R.id.textView4);
+        imageView_error = (ImageView)findViewById(R.id.imageView);
+
+        Intent intent = getIntent();
+
+//        id = 2;
+        date = intent.getStringExtra("date");
+        content = intent.getStringExtra("content");
+
+        time = "17:50";
+        textView1.setText(" ");
+        textView2.setText(" ");
+        textView3.setText(" ");
+        textView4.setText(" ");
+
         ButterKnife.bind(this);
 
         }
 
     private void MakeVideo() {
-        Intent intent = getIntent();
+
         id = 1;
-        content = intent.getStringExtra("content");
+        textView1.setText(date + " " + time + "에");
+        textView2.setText(address + "에서");
+        textView3.setText(content + "을(를) 하셨군요!");
+        textView4.setText("잘못된 운전 상황을 다시 한번 볼까요?");
 
         uriPath = "android.resource://" + getPackageName() + "/raw/video" + id;
         //String uriPath = "rtsp://127.0.0.1:80/dinosaur.mp4";
@@ -157,21 +187,26 @@ public class VideoViewActivity extends AppCompatActivity {
         Uri uri = Uri.parse(uriPath);
 
         videoView.setVideoURI(uri);
-        textView_explain.setText(address + " 에서 " + content + " 발생");
 
         //잠시
         mediaController = new MediaController(this);
+
         mediaController.setAnchorView(videoView);
+        //mediaController.setEnabled(true);
+
         videoView.setMediaController(mediaController);
 
-        videoView.requestFocus();
+
         videoView.start();
+
 
         videoView.postDelayed(new Runnable() {
             @Override
             public void run() {
+                mediaController.setBackgroundColor(Color.parseColor("#00aeef"));
+
                 mediaController.show(0);
-                videoView.pause();
+                //videoView.pause();
             }
         }, 100);
     }
@@ -191,7 +226,7 @@ public class VideoViewActivity extends AppCompatActivity {
             if (list.size() == 0) {
                 Log.d(TAG, "onCreate: 리스트없음");
             } else {
-                this.address = list.get(0).getAddressLine(0).toString();
+                address = list.get(0).getAddressLine(0).toString();
                 System.out.println("주소는" + address);
             }
         }

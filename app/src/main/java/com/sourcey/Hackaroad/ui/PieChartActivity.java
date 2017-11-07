@@ -9,9 +9,7 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -23,7 +21,6 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
@@ -36,6 +33,8 @@ public class PieChartActivity extends DemoBase implements
         OnChartValueSelectedListener {
 
     private PieChart mChart;
+    private TextView textView_piechart;
+    private TextView textView_barChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,24 +126,32 @@ public class PieChartActivity extends DemoBase implements
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
+//        colors.add(Color.parseColor("#ffe6e6"));
+//        colors.add(Color.parseColor("#ffcccc"));
+//        colors.add(Color.parseColor("##ff9999"));
+//        colors.add(Color.parseColor("#ff6666"));
+//        colors.add(Color.parseColor("#ff4d4d"));
 
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
 
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
+//        for (int c : ColorTemplate.JOYFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.JOYFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.COLORFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.JOYFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.PASTEL_COLORS)
+//            colors.add(c);
 
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
+        //colors.add(getColor());
 
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-
-        colors.add(ColorTemplate.getHoloBlue());
-
-        dataSet.setColors(colors);
+        dataSet.setColors(new int[]{Color.parseColor("#ff4d4d"),Color.parseColor("#ff4d4d"),
+                Color.parseColor("#ff4d4d"), Color.parseColor("#ff4d4d"), Color.parseColor("#ff4d4d")});
         //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
@@ -185,5 +192,9 @@ public class PieChartActivity extends DemoBase implements
     @Override
     public void onNothingSelected() {
         Log.i("PieChart", "nothing selected");
+    }
+
+    public static int getColor() {
+        return Color.rgb(51, 181, 0);
     }
 }
