@@ -36,14 +36,6 @@ import butterknife.OnClick;
 public class VideoViewActivity extends AppCompatActivity {
     private static final String TAG = "VideoViewActivity";
     private MediaController mediaController;
-    private TextView textView1;
-    private TextView textView2;
-    private TextView textView3;
-    private TextView textView4;
-
-
-    // d임시
-    private ImageView imageView_error;
 
     VideoView videoView;
     String uriPath;
@@ -67,6 +59,13 @@ public class VideoViewActivity extends AppCompatActivity {
 
     @BindView(R.id.mapBt)
     ImageButton mapBt;
+
+    @BindView(R.id.textView1) TextView textView1;
+    @BindView(R.id.textView2) TextView textView2;
+    @BindView(R.id.textView3) TextView textView3;
+    @BindView(R.id.textView4) TextView textView4;
+    @BindView(R.id.textView5) TextView textView5;
+    @BindView(R.id.imageView_error) ImageView imageView_error;
 
     @OnClick(R.id.mapBt)
     void onClickMapBt() {
@@ -145,17 +144,13 @@ public class VideoViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         requestCaseList();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoview);
 
         videoView = (VideoView) findViewById(R.id.videoView);
-        textView1 = (TextView) findViewById(R.id.textView1);
-        textView2 = (TextView) findViewById(R.id.textView2);
-        textView3 = (TextView) findViewById(R.id.textView3);
-        textView4 = (TextView) findViewById(R.id.textView4);
-        imageView_error = (ImageView)findViewById(R.id.imageView);
 
         Intent intent = getIntent();
 
@@ -164,10 +159,6 @@ public class VideoViewActivity extends AppCompatActivity {
         content = intent.getStringExtra("content");
 
         time = "17:50";
-        textView1.setText(" ");
-        textView2.setText(" ");
-        textView3.setText(" ");
-        textView4.setText(" ");
 
         ButterKnife.bind(this);
 
@@ -178,8 +169,9 @@ public class VideoViewActivity extends AppCompatActivity {
         id = 1;
         textView1.setText(date + " " + time + "에");
         textView2.setText(address + "에서");
-        textView3.setText(content + "을(를) 하셨군요!");
-        textView4.setText("잘못된 운전 상황을 다시 한번 볼까요?");
+        textView3.setText(content);
+        textView4.setText("을(를) 하셨군요!");
+        textView5.setText("잘못된 운전 상황을 다시 한번 볼까요?");
 
         uriPath = "android.resource://" + getPackageName() + "/raw/video" + id;
         //String uriPath = "rtsp://127.0.0.1:80/dinosaur.mp4";
