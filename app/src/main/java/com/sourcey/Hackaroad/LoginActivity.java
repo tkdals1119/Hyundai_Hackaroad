@@ -1,11 +1,11 @@
 package com.sourcey.Hackaroad;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +23,10 @@ public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences setting;
     SharedPreferences.Editor editor;
+    
     SharedPreferences auto;
+    SharedPreferences.Editor autoLogin;
+
     private BackPressCloseHandler backPressCloseHandle;
 
     private static final String TAG = "LoginActivity";
@@ -31,23 +34,38 @@ public class LoginActivity extends AppCompatActivity {
 
     private String login_id;
     private String password;
-    String id, pw;
+    String id;
+    String pw;
 
     @BindView(R.id.login_input_id) EditText login_input_id;
     @BindView(R.id.login_input_password) EditText login_input_password;
     @BindView(R.id.btn_login) Button btn_login;
     @BindView(R.id.link_signup) TextView link_signup;
+    @BindView(R.id.checkBox) CheckBox checkBox;
+
+
+    @OnClick(R.id.checkBox)
+    void onClickCheckBox(){
+        if(checkBox.isChecked()) {
+            autoLogin.putString("inputid", login_id);
+            autoLogin.putString("inputpw", password);
+            autoLogin.putBoolean("auto_login_enabled", true);
+            autoLogin.commit();
+        }
+        else{
+            autoLogin.clear();
+            autoLogin.commit();
+        }
+    }
+
 
     @OnClick(R.id.btn_login)
     void onClickBtn_Login()
     {
 
-        auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
-        id = auto.getString("inputid", null);
-        pw = auto.getString("inputpw", null);
-
         login_id = login_input_id.getText().toString();
         password = login_input_password.getText().toString();
+
 
         if(login_id.isEmpty() || password.isEmpty())
         {
@@ -57,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             Driver.getInstance().setloginid(login_id);
             Driver.getInstance().setpassword(password);
-
+            
             ApiRequester.getInstance().checkDuplicateDriver(Driver.getInstance(), new ApiRequester.UserCallback<Boolean>() {
                 @Override
                 public void onSuccess(Boolean result) {
@@ -67,17 +85,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         System.out.println("넣었다"+Driver.getInstance().getLoginid());
                         editor.commit();
-
-                        if (login_id == "ny" && password == "네이버") {
-                            SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
-                            //아이디가 '부르곰'이고 비밀번호가 '네이버'일 경우 SharedPreferences.Editor를 통해
-                            //auto의 loginId와 loginPwd에 값을 저장해 줍니다.
-                            SharedPreferences.Editor autoLogin = auto.edit();
-                            autoLogin.putString("inputid", login_id);
-                            autoLogin.putString("inputpw", password);
-                            //꼭 commit()을 해줘야 값이 저장됩니다 ㅎㅎ
-                            autoLogin.commit();
-                        }
 
                         Toast.makeText(LoginActivity.this, "로그인 완료!", Toast.LENGTH_SHORT).show();
 
@@ -111,49 +118,23 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+
         setting = getSharedPreferences("setting", MODE_PRIVATE);
         editor= setting.edit();
 
-//        if(id !=null && pw != null) {
-//            if(id.equals("ny") && pw.equals("1234")) {
-//                Toast.makeText(LoginActivity.this, id +"님 자동로그인 입니다.", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(LoginActivity.this, Frag_ListActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        }
-//
-//        //id와 pwd가 null이면 Mainactivity가 보여짐.
-//        else if(id == null && pw == null){
-//            btn_login.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if (login_id == "ny" && password == "네이버") {
-//                        SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
-//                        //아이디가 '부르곰'이고 비밀번호가 '네이버'일 경우 SharedPreferences.Editor를 통해
-//                        //auto의 loginId와 loginPwd에 값을 저장해 줍니다.
-//                        SharedPreferences.Editor autoLogin = auto.edit();
-//                        autoLogin.putString("id", login_id);
-//                        autoLogin.putString("pw", password);
-//                        //꼭 commit()을 해줘야 값이 저장됩니다 ㅎㅎ
-//                        autoLogin.commit();
-//                        Toast.makeText(LoginActivity.this, login_id+"님 환영합니다.", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(LoginActivity.this, Frag_ListActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                }
-//            });
-//
-//        }
+        auto = getSharedPreferences("auto", MODE_PRIVATE);
+        autoLogin = auto.edit();
 
         backPressCloseHandle = new BackPressCloseHandler(this);
+
 
     }
 
     @Override
     public void onBackPressed() {
         // Disable going back to the MainActivity
+
         backPressCloseHandle.onBackPressed();
     }
+
 }

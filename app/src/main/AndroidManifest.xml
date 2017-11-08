@@ -40,6 +40,7 @@
             android:theme="@style/AppTheme.Dark" />
         <activity android:name=".ui.PieChartActivity" />
         <activity android:name=".ui.MapActivity"></activity>
+
     </application>
 
 </manifest>
