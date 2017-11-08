@@ -129,7 +129,7 @@ public class VideoViewActivity extends AppCompatActivity {
 
                         SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                         SimpleDateFormat destFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        SimpleDateFormat sourceFormat2 = new SimpleDateFormat("HH:mm:ss.SSS");
+                        SimpleDateFormat sourceFormat2 = new SimpleDateFormat("HH:mm:ss");
 
                         Date date = null;
                         Date time = null;
