@@ -1,10 +1,8 @@
 package com.sourcey.Hackaroad.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -18,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.sourcey.Hackaroad.R;
 import com.sourcey.Hackaroad.model.Case_List;
@@ -30,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
 import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 
 /**
@@ -115,6 +111,13 @@ public class Frag_ListActivity extends Fragment implements WaveSwipeRefreshLayou
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
+    private void putDataToStatistics(){
+        Bundle bundle = new Bundle();
+        bundle.putStringArray("list_habit_arr", list_habit_arr);
+        Fragment f = new Frag_StatisticsActivity();
+        f.setArguments(bundle);
+    }
+
     public void setMyData(String[] list_arr) {
         this.list_habit_arr = list_arr;
     }
@@ -166,6 +169,7 @@ public class Frag_ListActivity extends Fragment implements WaveSwipeRefreshLayou
 
                     initDataSet();
                     putDataToAdapter();
+                    putDataToStatistics();
                 }
             }
             @Override

@@ -30,6 +30,7 @@ public class Frag_StatisticsActivity extends SimpleFragment {
     private ArrayList<ChartItem> chartItems;
     ArrayList<Integer> myhabbit = new ArrayList<>();
     ArrayList<Double> myhabbit2 = new ArrayList<>();
+    String[] receive_habit_arr;
 
     String[] marker = {"한 손 운전","정지선 미준수","과속방지턱", "경사로 주차", "급정거"};
 
@@ -38,12 +39,16 @@ public class Frag_StatisticsActivity extends SimpleFragment {
         View view = inflater.inflate(R.layout.activity_frag_statistics, container, false);
         ButterKnife.bind(this, view);
 
+//        Bundle bundle = this.getArguments();
+//        receive_habit_arr = bundle.getStringArray("list_habit_arr");
+
         initModel();
         setView();
         return view;
     }
 
     private void initModel() {
+
         myhabbit.clear();
 
         for(int i=0; i<5; i++)

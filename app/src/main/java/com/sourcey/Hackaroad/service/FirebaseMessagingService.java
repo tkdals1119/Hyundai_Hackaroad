@@ -11,7 +11,6 @@ import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.RemoteMessage;
-import com.sourcey.Hackaroad.MainActivity;
 import com.sourcey.Hackaroad.R;
 
 /**
@@ -38,9 +37,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.new2_logo).setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher) )
-                .setContentTitle("Push Title ")
-                .setContentText(message)
+                .setSmallIcon(R.drawable.car48).setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.car144) )
+                .setContentTitle("운전이 종료되었습니다.")
+                .setContentText("운전 결과를 확인해 볼까요?")
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri).setLights(000000255,500,2000)
                 .setVibrate(new long[]{1, 1000}) // 진동
