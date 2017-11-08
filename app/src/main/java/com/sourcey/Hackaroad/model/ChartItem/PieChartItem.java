@@ -52,7 +52,7 @@ public class PieChartItem extends ChartItem {
                     R.layout.list_item_piechart, null);
             holder.chart = (PieChart) convertView.findViewById(R.id.chart);
             holder.textView_piechart = (TextView)convertView.findViewById(R.id.textView_piechart);
-            holder.textView_piechart.setText("Piechart!!!!!!!!!");
+            holder.textView_piechart.setText("유형별 잘못된 운전 습관");
             convertView.setTag(holder);
 
         } else {

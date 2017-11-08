@@ -45,7 +45,7 @@ public class BarChartItem extends ChartItem {
                     R.layout.list_item_barchart, null);
             holder.chart = (BarChart) convertView.findViewById(R.id.chart);
             holder.textView_barchart = (TextView)convertView.findViewById(R.id.textView_barchart);
-            holder.textView_barchart.setText("Barchart!!!!!!!!!");
+            holder.textView_barchart.setText("월별 체크 현황");
 
             convertView.setTag(holder);
 
