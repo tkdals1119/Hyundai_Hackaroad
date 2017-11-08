@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "226981473778",
+    "firebase_url": "https://hackaroad-96288.firebaseio.com",
+    "project_id": "hackaroad-96288",
+    "storage_bucket": "hackaroad-96288.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226981473778:android:b8caae41c4a318af",
+        "android_client_info": {
+          "package_name": "com.sourcey.Hackaroad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226981473778-03vhvm7farmlcvu626opetd52dkqlqb5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhyuavfiz6m9FpNSRsLkXFTp3jhzhtQqQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
