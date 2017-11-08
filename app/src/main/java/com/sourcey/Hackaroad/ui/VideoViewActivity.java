@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.sourcey.Hackaroad.R;
 import com.sourcey.Hackaroad.model.Case_List;
 import com.sourcey.Hackaroad.utils.ApiRequester;
@@ -28,6 +30,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 
 /**
  * Created by Jeong on 2017-10-30.
@@ -69,6 +72,7 @@ public class VideoViewActivity extends AppCompatActivity {
     @BindView(R.id.textView4) TextView textView4;
     @BindView(R.id.textView5) TextView textView5;
     @BindView(R.id.imageView_error) ImageView imageView_error;
+    @BindView(R.id.progress_wheel) ProgressWheel progress;
 
     @OnClick(R.id.mapBt)
     void onClickMapBt() {
@@ -162,7 +166,6 @@ public class VideoViewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
         Intent intent = getIntent();
         this.position = intent.getIntExtra("position", 1);
 
@@ -176,18 +179,13 @@ public class VideoViewActivity extends AppCompatActivity {
         date = intent.getStringExtra("date");
         content = intent.getStringExtra("content");
 
-
-        textView1.setText(" ");
-        textView2.setText(" ");
-        textView3.setText(" ");
-        textView4.setText(" ");
-
-
         ButterKnife.bind(this);
 
         }
 
     private void MakeVideo() {
+        progress.setVisibility(View.GONE);
+
         textView1.setText(date + ", " + list_arr_time[position] + "에");
         textView2.setText(address + "에서");
         textView3.setText(content);

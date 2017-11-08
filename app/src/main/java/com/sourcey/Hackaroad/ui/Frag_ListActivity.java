@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.pnikosis.materialishprogress.ProgressWheel;
 import com.sourcey.Hackaroad.R;
 import com.sourcey.Hackaroad.model.Case_List;
@@ -27,24 +30,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.BindView;
+import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+
 /**
  * Created by BSM on 2017-10-26.
  */
 
-public class Frag_ListActivity extends Fragment {
+public class Frag_ListActivity extends Fragment implements WaveSwipeRefreshLayout.OnRefreshListener {
 
     private RecyclerView mRecyclerView;
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Recycler_item> mMyData;
+    private ProgressWheel progress;
+    private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
 
     private String[] list_arr;
     private String[] list_arr_date;
 
     private String[] list_habit_arr;
     private String[] list_habit_date_arr;
-
-    Context context;
 
     Activity root = getActivity();
 
@@ -57,12 +63,41 @@ public class Frag_ListActivity extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
         mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(5));
         mRecyclerView.scrollToPosition(0);
 
+       progress = (ProgressWheel) view.findViewById(R.id.progress_wheel);
+       mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) view.findViewById(R.id.main_swipe);
+        mWaveSwipeRefreshLayout.setColorSchemeColors(Color.WHITE, Color.WHITE);
+        mWaveSwipeRefreshLayout.setOnRefreshListener(this);
+        mWaveSwipeRefreshLayout.setWaveColor(Color.parseColor("#00BFFF"));
+
         return view;
     }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mWaveSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
+        requestCaseList();
+    }
+
+//    private class Task extends AsyncTask<Void, Void, String[]> {
+//        @Override
+//        protected String[] doInBackground(Void... voids) {
+//            return new String[0];
+//        }
+//
+//        @Override protected void onPostExecute(String[] result) {
+//            // Call setRefreshing(false) when the list has been refreshed.
+//            mWaveSwipeRefreshLayout.setRefreshing(false);
+//            super.onPostExecute(result);
+//        }
+//    }
 
     private void putDataToAdapter() {
         mAdapter = new RecyclerAdapter(getActivity(), mMyData, new RecyclerItemClickListener() {
@@ -153,8 +188,8 @@ public class Frag_ListActivity extends Fragment {
         for(int i=0; i<size; i++)
         {
             item[i]=new Recycler_item(list_habit_date_arr[i], list_habit_arr[i], R.drawable.ic_navigate_next_black_48dp);
-
         }
         for(int i=0; i<size; i++) mMyData.add(item[i]);
+        progress.setVisibility(View.GONE);
     }
 }
