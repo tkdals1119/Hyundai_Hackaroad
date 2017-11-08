@@ -52,11 +52,14 @@ public class BarChartItem extends ChartItem {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        
+
 
         // apply styling
         holder.chart.getDescription().setEnabled(false);
         holder.chart.setDrawGridBackground(false);
         holder.chart.setDrawBarShadow(false);
+
 
         XAxis xAxis = holder.chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -65,6 +68,7 @@ public class BarChartItem extends ChartItem {
         xAxis.setDrawAxisLine(false);
 
         YAxis leftAxis = holder.chart.getAxisLeft();
+
         leftAxis.setTypeface(mTf);
         leftAxis.setLabelCount(5, false);
         leftAxis.setSpaceTop(20f);

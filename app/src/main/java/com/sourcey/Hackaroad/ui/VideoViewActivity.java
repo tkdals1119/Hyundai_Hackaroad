@@ -115,13 +115,17 @@ public class VideoViewActivity extends AppCompatActivity {
                     list_arr_time = new String[size];
                     list_latitude = new String[size];
                     list_longtitude =  new String[size];
+
                     int count = 0;
+
+
 
                     for(Case_List list : result)
                     {
                         list_arr[count] = list.gethabbitname();
                         list_latitude[count] = list.getlatitude();
                         list_longtitude[count] = list.getlongtitude();
+
 
                         SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                         SimpleDateFormat destFormat = new SimpleDateFormat("yyyy-MM-dd");

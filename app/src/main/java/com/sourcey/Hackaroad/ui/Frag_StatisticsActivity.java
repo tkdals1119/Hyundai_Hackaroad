@@ -49,14 +49,15 @@ public class Frag_StatisticsActivity extends SimpleFragment {
         for(int i=0; i<5; i++)
         {
             myhabbit.add(i, 0);
+
         }
 
-        for(int j=0; j<10; j++)
+        for(int j=0; j<12; j++)
         {
             int random = (int) (Math.random()*10);
 
             myhabbit2.add(j, 0.0);
-            myhabbit2.set(j, Double.valueOf(random));
+            myhabbit2.set(j, Double.valueOf(random) * 12);
         }
 
         myhabbit.set(0, 5);
